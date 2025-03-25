@@ -8,6 +8,15 @@
 \usepackage{multirow}
 \usepackage{lastpage}
 
+\usepackage[
+backend=biber,
+% style=alphabetic,
+sorting=ynt,
+date=iso,
+urldate=iso
+]{biblatex}
+\addbibresource{refs.bib}
+
 \usepackage[firstpage=true]{background}
 \backgroundsetup{
     scale=0.3,
@@ -82,8 +91,12 @@
 \tableofcontents
 
 \section{Introduction}
+What is the system you want to design? Why?
+detailed account of the project objectives
+and achievements (for future reference, evaluation, and even
+reproduction)
 
-The CENG2400 final project involved implementing a gyroscope-controlled laser turret 
+The CENG3430 final project involved implementing a computer vision system on the Zynq UltraScale+ MPSoC \cite{zynq_ultrascale_swdev}
 that uses the MPU6050 to direct the laser. Our goal was to create a responsive turret for maximizing hits.
 
 \noindent The workflow consists of two phases:
@@ -91,7 +104,7 @@ that uses the MPU6050 to direct the laser. Our goal was to create a responsive t
     \item \textbf{Data Pre-processing:} We collect and process gyro and accelerometer 
           data from the \\MPU6050, then transmit the calculated angles via UART.
     \item \textbf{Data AI-Inferencing:} The angles are received and converted into PWM 
-          signals to control the servo motors.
+          signals to control the servo motors using Vitis AI \cite{vitis_ai_docs} for efficient inference.
     \item \textbf{Data Post-processing:} The PWM signals are received and converted into 
           the corresponding angles to control the servo motors.
 \end{enumerate}
@@ -115,6 +128,13 @@ This report outlines our challenges faced and insights gained during implementat
 \end{tabularx}
 
 \section{Design}
+Overview: Describe the overall architecture, inputs, and outputs of the
+system.
+You are highly suggested to use flowcharts and block diagrams for
+better presentation.
+Module Descriptions: Discuss each module of the system clearly and
+the interactions among them.
+
 \subsection{Transmission of Data}
 \subsubsection{v1 of data sending formatting(float string)}\text{}
 \begin{code}
@@ -159,6 +179,18 @@ we noticed that sometimes the data received would swap their positions(i.e. the 
 or sometimes some digits that should be in the pitch angle would appears in the array of yaw angle characters received.
 Therefore, we started to investigate in the slave end.
 
+\section{Implementation}
+Discuss in detail how you implement the system, you can take
+screenshots to provide step-by-step instructions, or explain the source
+code(s) part by part. You can also provide the screenshot of the
+validated block design (if any).
+
+\section{Results}
+What have you achieved? Have you realized the preset goals?
+What are the difficulties or limitations encountered during the
+implementation, and how you resolved them?
+What are the further improvement and possibilities?
+
 \section{Conclusion}
 To sum up, we have successfully implemented a responsive laser turret that can capture the motion of hand and reflect it to the laser turret wirelessly.
 \newline
@@ -166,5 +198,8 @@ Before working on this project, we have expected that the most challenging part 
 But surprisingly, we found that the most challenging part was actually the data transmission part, which we have to ensure the data integrity and stability.
 Through this iterative process of design, implementation, and debugging, we have gained valuable insights into embedded systems development. 
 These experiences and lessons learned will prove invaluable for future embedded systems projects encountered.
+
+\section{References}
+\printbibliography[heading=none]
 
 \end{document}
