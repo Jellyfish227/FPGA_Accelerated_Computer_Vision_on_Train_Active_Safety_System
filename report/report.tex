@@ -1,0 +1,170 @@
+\documentclass[12pt, a4paper]{article}
+    
+\usepackage{homework}
+\usepackage{amsmath}				% For Math
+\usepackage{fancyhdr}				% For fancy header/footer
+\usepackage{graphicx}				% For including figure/image
+\usepackage{cancel}					% To use the slash to cancel out stuff in work
+\usepackage{multirow}
+\usepackage{lastpage}
+
+\usepackage[firstpage=true]{background}
+\backgroundsetup{
+    scale=0.3,
+    angle=0,
+    opacity=0.1,
+    contents={%
+        \includegraphics[scale=1]{figs/Emblem_of_CU.png}
+    }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Set up fancy header/footer
+\pagestyle{fancy}
+\setlength{\headheight}{28pt}
+\fancyhead[LO,L]{CENG3430 Rapid Prototyping of Digital System\\Author: C.H. Yu, }
+\fancyhead[CO,C]{}
+\fancyhead[RO,R]{Final Project\\Date: \today}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{}
+\fancyfoot[RO,R]{Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+
+		\bf\LARGE{The Chinese University of Hong Kong}
+        \bf\Large{Department of Computer Science\\and Engineering}
+		
+		\vspace{80pt}
+		
+		\vspace{15pt}
+		\textbf{\Large CENG3430 Rapid Prototyping of Digital System\\}
+		\vspace{10pt}
+		\textbf{\Large Final Project - FPGA-based Computer Vision Accelerator for Train Active Safety System}\\
+		\vspace{10pt}
+		\textbf{\Large Report}\\
+        \vspace{6pt}
+        % {\large Project Demo Date: 16 May 2025}\\
+        {\large Project Demo Deadline: 16 May 2025 23:59}
+		\vspace{40pt}
+		
+        \vspace{15pt}
+		\textbf{\normalsize
+            1155193237 - Yu Ching Hei (chyu2@cse.cuhk.edu.hk)\\
+            1155XXXXXX -  (1155XXXXXX@link.cuhk.edu.hk)\\
+        }
+		\vspace{40pt}
+        \textbf{\large Source code and project history is available on GitHub:}\\
+        \normalsize \url{https://github.com/Jellyfish227/FPGA_Accelerated_Computer_Vision_on_Train_Active_Safety_System.git}\\
+        \vspace{60pt}
+		\textit{Under the kind support and guidance of}\\
+		\textbf{\large Prof. Ming-Chang YANG}\\
+		\vspace{20pt}
+        % \textit{Also thank you for the help provided by teaching assistants}\\
+		% \textbf{\large 
+        %     Mr. Chenchen ZHAO\\
+        %     Mr. Kezhi LI\\
+        %     Mr. Han ZHAO\\
+        %     Mr. Zhirui ZHANG\\
+        % }
+		
+	\end{center}
+\end{titlepage}
+\setcounter{page}{2}
+
+\tableofcontents
+
+\section{Introduction}
+
+The CENG2400 final project involved implementing a gyroscope-controlled laser turret 
+that uses the MPU6050 to direct the laser. Our goal was to create a responsive turret for maximizing hits.
+
+\noindent The workflow consists of two phases:
+\begin{enumerate}
+    \item \textbf{Data Pre-processing:} We collect and process gyro and accelerometer 
+          data from the \\MPU6050, then transmit the calculated angles via UART.
+    \item \textbf{Data AI-Inferencing:} The angles are received and converted into PWM 
+          signals to control the servo motors.
+    \item \textbf{Data Post-processing:} The PWM signals are received and converted into 
+          the corresponding angles to control the servo motors.
+\end{enumerate}
+This report outlines our challenges faced and insights gained during implementation, aiming to deliver a functional motion-controlled laser turret.
+
+\section{Division of Work}
+\begin{tabularx}{\textwidth}{|l||X|}
+    \hline
+    \textbf{Task} & \textbf{Person In Charge} \\
+    \hline\hline
+    \textbf{Project Proposal} &  \\
+    \hline
+    \textbf{Data Pre-processing} & Yu Ching Hei,  \\
+    \hline
+    \textbf{Data AI-Inferencing} & Yu Ching Hei \\
+    \hline
+    \textbf{Data Post-processing} &  \\
+    \hline
+    \textbf{Report} & Yu Ching Hei \\
+    \hline
+\end{tabularx}
+
+\section{Design}
+\subsection{Transmission of Data}
+\subsubsection{v1 of data sending formatting(float string)}\text{}
+\begin{code}
+/* Commit hash: c6e8ed6, main_mpu.c*/
+void sendData(float yawAngle, float pitchAngle) {
+    char data[22];
+    // format the data as a string
+    sprintf(data, "%.10f,%.10f", yawAngle, pitchAngle);
+    char* chp = data;
+    while (*chp) 
+        UARTCharPut(UART5_BASE, *chp++);
+}
+\end{code}\text{}\\
+In this initial implementation, we formatted the yaw and pitch angles into a string using sprintf. 
+While this allowed us to send the angles with high precision (10 decimal places), 
+the long string to be sent over UART wirelessly increases the risk of data loss. And turns out during the testing, 
+we found that the data received was very unstable, we have presumed that the problem is due to the data being sent is too long, 
+which means there are more characters that can potentially be lost, and just one character lost can cause the whole data to be corrupted.
+
+\subsubsection{v2 of data sending formatting(int string)}\text{}
+\begin{code}
+/* Commit hash: af09000, main_mpu.c */
+void sendData(float yawAngle, float pitchAngle) {
+    char data[7]; 
+    sprintf(data, "%03d%03d\0", (int)yawAngle, (int)pitchAngle);
+    /* same send looping as before*/
+    UARTCharPut(UART5_BASE, '\n'); // '\n' to mark end of transmission
+}
+\end{code}
+\textbf{}\\
+In this update, we have made 2 important changes:
+\begin{enumerate}
+    \item We have changed the data string to be a string of 7 characters, which is a lot shorter than the previous 22 characters.
+    \item We have added a newline character to indicate the end of the transmission, which is a simple way to check the data integrity.
+\end{enumerate}
+We decided to sacrifice the precision of the data to just send the integral part of the angle, 
+in order to reduce the risk of data corruption due to data loss during transmission. 
+And in the previous implementation, we found that we have no way to check the data integrity, 
+so we have to add a newline character to indicate the end of the transmission.
+However, the problem was not fixed, in the slave end, we found that the data received was still very unstable, 
+we noticed that sometimes the data received would swap their positions(i.e. the yaw angle would be the pitch angle and vice versa), 
+or sometimes some digits that should be in the pitch angle would appears in the array of yaw angle characters received.
+Therefore, we started to investigate in the slave end.
+
+\section{Conclusion}
+To sum up, we have successfully implemented a responsive laser turret that can capture the motion of hand and reflect it to the laser turret wirelessly.
+\newline
+Before working on this project, we have expected that the most challenging part would be the motion capturing part. 
+But surprisingly, we found that the most challenging part was actually the data transmission part, which we have to ensure the data integrity and stability.
+Through this iterative process of design, implementation, and debugging, we have gained valuable insights into embedded systems development. 
+These experiences and lessons learned will prove invaluable for future embedded systems projects encountered.
+
+\end{document}

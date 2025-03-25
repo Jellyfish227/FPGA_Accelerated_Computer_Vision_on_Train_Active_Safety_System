@@ -1,0 +1,19 @@
+
+# LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+*.dvi
+*.nav
+*.snm
+*.vrb
+_minted*
+
+# output files
+# *.pdf
