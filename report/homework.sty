@@ -198,6 +198,12 @@
     stringstyle=\color{codepurple},
     basicstyle=\ttfamily\footnotesize,
     identifierstyle=\color{blue}, 
+    frame=lines,
+    framerule=0.8pt,
+    framexleftmargin=1em,
+    framexrightmargin=1em,
+    framesep=0.5em,
+    rulecolor=\color{black},
     breakatwhitespace=false,         
     breaklines=true,                 
     captionpos=b,                    
@@ -212,7 +218,11 @@
 
 \lstset{style=mystyle}
 
-\lstnewenvironment{code}[1][language=c]
+\lstnewenvironment{code}[1][]
  {%
-  \lstset{belowskip=-1ex,#1}%
+  \lstset{
+    belowskip=-1ex,
+    language=c++,
+    #1
+  }%
  }{}

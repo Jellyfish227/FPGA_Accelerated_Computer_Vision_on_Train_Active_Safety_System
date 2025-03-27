@@ -2,7 +2,6 @@
     
 \usepackage{homework}
 \usepackage{amsmath}				% For Math
-\usepackage{fancyhdr}				% For fancy header/footer
 \usepackage{graphicx}				% For including figure/image
 \usepackage{cancel}					% To use the slash to cancel out stuff in work
 \usepackage{multirow}
@@ -31,19 +30,20 @@ urldate=iso
 % Set up fancy header/footer
 \pagestyle{fancy}
 \setlength{\headheight}{28pt}
-\fancyhead[LO,L]{CENG3430 Rapid Prototyping of Digital System\\Author: C.H. Yu, }
+\fancyhead[LO,L]{CENG3430 Rapid Prototyping of Digital System\\Author: C.H. Yu, C.H. Sennett Cheng}
 \fancyhead[CO,C]{}
 \fancyhead[RO,R]{Final Project\\Date: \today}
 \fancyfoot[LO,L]{}
 \fancyfoot[CO,C]{}
-\fancyfoot[RO,R]{Page \thepage\ of \pageref{LastPage}}
+% \fancyfoot[RO,R]{Page \thepage\ of \pageref{LastPage}}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
+
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 %%%%%%%%%%%%%%%%%%%%%%
 
-\begin{document}
+\begin{document}  
 
 \begin{titlepage}
     \begin{center}
@@ -67,7 +67,7 @@ urldate=iso
         \vspace{15pt}
 		\textbf{\normalsize
             1155193237 - Yu Ching Hei (chyu2@cse.cuhk.edu.hk)\\
-            1155XXXXXX -  (1155XXXXXX@link.cuhk.edu.hk)\\
+            1155206044 - Cheng Chung Hei Sennett(1155206044@link.cuhk.edu.hk)\\
         }
 		\vspace{40pt}
         \textbf{\large Source code and project history is available on GitHub:}\\
@@ -78,7 +78,6 @@ urldate=iso
 		\vspace{20pt}
         % \textit{Also thank you for the help provided by teaching assistants}\\
 		% \textbf{\large 
-        %     Mr. Chenchen ZHAO\\
         %     Mr. Kezhi LI\\
         %     Mr. Han ZHAO\\
         %     Mr. Zhirui ZHANG\\
@@ -86,9 +85,34 @@ urldate=iso
 		
 	\end{center}
 \end{titlepage}
+
+\pagenumbering{roman}
 \setcounter{page}{2}
+\fancyfoot[RO,R]{Page \thepage}
 
 \tableofcontents
+
+\section*{Division of Work}
+\begin{tabularx}{\textwidth}{|l||X|}
+    \hline
+    \textbf{Task} & \textbf{Person In Charge} \\
+    \hline\hline
+    \textbf{Project Proposal} & Cheng Chung Hei Sennett \\
+    \hline
+    \textbf{Data Pre-processing} & Yu Ching Hei, Cheng Chung Hei Sennett \\
+    \hline
+    \textbf{AI-Inferencing} & Yu Ching Hei \\
+    \hline
+    \textbf{Post-processing} & Cheng Chung Hei Sennett \\
+    \hline
+    \textbf{Report} & Yu Ching Hei \\
+    \hline
+\end{tabularx}
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\fancyfoot[RO,R]{Page \thepage\ of \pageref{LastPage}}
 
 \section{Introduction}
 What is the system you want to design? Why?
@@ -110,23 +134,6 @@ that uses the MPU6050 to direct the laser. Our goal was to create a responsive t
 \end{enumerate}
 This report outlines our challenges faced and insights gained during implementation, aiming to deliver a functional motion-controlled laser turret.
 
-\section{Division of Work}
-\begin{tabularx}{\textwidth}{|l||X|}
-    \hline
-    \textbf{Task} & \textbf{Person In Charge} \\
-    \hline\hline
-    \textbf{Project Proposal} &  \\
-    \hline
-    \textbf{Data Pre-processing} & Yu Ching Hei,  \\
-    \hline
-    \textbf{Data AI-Inferencing} & Yu Ching Hei \\
-    \hline
-    \textbf{Data Post-processing} &  \\
-    \hline
-    \textbf{Report} & Yu Ching Hei \\
-    \hline
-\end{tabularx}
-
 \section{Design}
 Overview: Describe the overall architecture, inputs, and outputs of the
 system.
@@ -137,7 +144,7 @@ the interactions among them.
 
 \subsection{Transmission of Data}
 \subsubsection{v1 of data sending formatting(float string)}\text{}
-\begin{code}
+\begin{code}[language=c]
 /* Commit hash: c6e8ed6, main_mpu.c*/
 void sendData(float yawAngle, float pitchAngle) {
     char data[22];
@@ -155,7 +162,7 @@ we found that the data received was very unstable, we have presumed that the pro
 which means there are more characters that can potentially be lost, and just one character lost can cause the whole data to be corrupted.
 
 \subsubsection{v2 of data sending formatting(int string)}\text{}
-\begin{code}
+\begin{code}[language=c] 
 /* Commit hash: af09000, main_mpu.c */
 void sendData(float yawAngle, float pitchAngle) {
     char data[7]; 
