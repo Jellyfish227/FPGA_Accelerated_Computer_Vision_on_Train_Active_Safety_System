@@ -65,3 +65,7 @@ This is an associated final project for CENG3430 - Rapid Prototyping of Digital 
         cd <Vitis AI dir>
         ./docker_run.sh vitis-ai-<image-repo>:<image-tag>
         ```
+9. Setup reference design in Vivado workflow system : Done on 2025-05-09 15:57:13
+10. TRD Synthesis : Done on 2025-05-09 16:22:01
+11. TRD Implementation : Done on 2025-05-09 17:52:09
+12. Generate TRD bitstream : Done on 2025-05-09 17:57:31
