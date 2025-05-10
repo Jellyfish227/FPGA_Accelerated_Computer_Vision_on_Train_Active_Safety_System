@@ -69,3 +69,13 @@ This is an associated final project for CENG3430 - Rapid Prototyping of Digital 
 10. TRD Synthesis : Done on 2025-05-09 16:22:01
 11. TRD Implementation : Done on 2025-05-09 17:52:09
 12. Generate TRD bitstream : Done on 2025-05-09 17:57:31
+13. Create PetaLinux project with Vivado workflow
+14. (Optional) To adapt with newer version of toolchain, convert .xsa hw description into new System Device Tree(sdt) system with XSCT. 
+15. Configure PetaLinux project with hw platform configurations (i.e. .xsa(deprecating approach) or dst(our approach)), together with corresponding bsp
+16. Configure system image build, including rootfs, kernals, drivers, library and enabled modules and features
+17. Include and set bitBake build receipes, like vai-recepies
+18. Build PetaLinux project into .elf bit files
+19. Package generated images into MCS images(BOOT.BIN, boot.scr, *.gz.u-boot)
+20. Package all MCS images into wic image
+21. Flash wic image to SD card for boot media
+
