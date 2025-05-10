@@ -1,0 +1,28 @@
+From c89d2e906cf4354d6a83ce692ff56255d96f5470 Mon Sep 17 00:00:00 2001
+From: Hyunok Kim <hokim@inipro.net>
+Date: Wed, 25 Dec 2024 13:04:54 +0000
+Subject: [PATCH] Fix pybind11 include missing
+
+Signed-off-by: Hyunok Kim <hokim@inipro.net>
+---
+ src/vai_runtime/unilog/cmake/vai_add_pybind11_module.cmake | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/vai_runtime/unilog/cmake/vai_add_pybind11_module.cmake b/src/vai_runtime/unilog/cmake/vai_add_pybind11_module.cmake
+index eb7d17916..d3e877db7 100644
+--- a/src/vai_runtime/unilog/cmake/vai_add_pybind11_module.cmake
++++ b/src/vai_runtime/unilog/cmake/vai_add_pybind11_module.cmake
+@@ -25,10 +25,10 @@ if(BUILD_PYTHON)
+     #    "from sys import stdout; from distutils import sysconfig; import os;stdout.write(os.path.basename(os.path.dirname(sysconfig.get_python_lib())))"
+     #  OUTPUT_VARIABLE PYTHON_INSTALL_DIR)
+     find_path(
+-      _PYBIND11_PATH pybind11
++      _PYBIND11_PATH pybind11.h
+       HINTS
+-        /usr/include/python${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR}m
+-        /usr/include/python${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR})
++        /usr/lib/python${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR}m/site-packages/pybind11/include/pybind11
++        /usr/lib/python${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR}/site-packages/pybind11/include/pybind11)
+     get_filename_component(PYBIND11_PATH ${_PYBIND11_PATH} DIRECTORY)
+     message(STATUS "PYBIND11_PATH is ${_PYBIND11_PATH}")
+     message(

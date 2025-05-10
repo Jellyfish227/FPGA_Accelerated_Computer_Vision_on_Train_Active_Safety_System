@@ -1,0 +1,106 @@
+From 5e44672f4be876f0a702ddc3a83cf59ecd2ee0ee Mon Sep 17 00:00:00 2001
+From: Hyunok Kim <hokim@inipro.net>
+Date: Wed, 25 Dec 2024 14:37:23 +0000
+Subject: [PATCH] Fix cstdint include and absl library missing
+
+Signed-off-by: Hyunok Kim <hokim@inipro.net>
+---
+ src/vai_runtime/xir/CMakeLists.txt            |  1 +
+ src/vai_runtime/xir/src/xir/CMakeLists.txt    |  2 +-
+ .../xir/src/xir/attrs/attr_def.cpp            | 35 ++++++++++---------
+ 3 files changed, 20 insertions(+), 18 deletions(-)
+
+diff --git a/src/vai_runtime/xir/CMakeLists.txt b/src/vai_runtime/xir/CMakeLists.txt
+index 1ae5e000b..bdfca5116 100644
+--- a/src/vai_runtime/xir/CMakeLists.txt
++++ b/src/vai_runtime/xir/CMakeLists.txt
+@@ -39,6 +39,7 @@ endif()
+ find_package(Boost REQUIRED)
+ find_package(Protobuf REQUIRED)
+ find_package(Threads REQUIRED)
++find_package(absl REQUIRED)
+ 
+ add_subdirectory(src)
+ add_subdirectory(tools)
+diff --git a/src/vai_runtime/xir/src/xir/CMakeLists.txt b/src/vai_runtime/xir/src/xir/CMakeLists.txt
+index fc52a6099..330013751 100644
+--- a/src/vai_runtime/xir/src/xir/CMakeLists.txt
++++ b/src/vai_runtime/xir/src/xir/CMakeLists.txt
+@@ -96,7 +96,7 @@ target_include_directories(
+ if(BUILD_SHARED_LIBS)
+     target_link_libraries(
+       xir
+-      PRIVATE protobuf::libprotobuf Threads::Threads ${CMAKE_DL_LIBS}
++      PRIVATE protobuf::libprotobuf absl::hash absl::log_internal_message Threads::Threads ${CMAKE_DL_LIBS}
+       PUBLIC unilog::unilog)
+     if(NOT MSVC)
+       if(Protobuf_USE_STATIC_LIBS)
+diff --git a/src/vai_runtime/xir/src/xir/attrs/attr_def.cpp b/src/vai_runtime/xir/src/xir/attrs/attr_def.cpp
+index a7c2cc824..d817cf3a8 100644
+--- a/src/vai_runtime/xir/src/xir/attrs/attr_def.cpp
++++ b/src/vai_runtime/xir/src/xir/attrs/attr_def.cpp
+@@ -14,6 +14,7 @@
+  * limitations under the License.
+  */
+ 
++#include <cstdint>
+ #include <map>
+ #include <string>
+ #include <typeindex>
+@@ -25,31 +26,31 @@ namespace xir {
+ using namespace std;
+ 
+ std::type_index TYPE_INDEX_BOOL = std::type_index(typeid(bool));
+-std::type_index TYPE_INDEX_INT8 = std::type_index(typeid(int8_t));
+-std::type_index TYPE_INDEX_UINT8 = std::type_index(typeid(uint8_t));
+-std::type_index TYPE_INDEX_INT16 = std::type_index(typeid(int16_t));
+-std::type_index TYPE_INDEX_UINT16 = std::type_index(typeid(uint16_t));
+-std::type_index TYPE_INDEX_INT32 = std::type_index(typeid(int32_t));
+-std::type_index TYPE_INDEX_UINT32 = std::type_index(typeid(uint32_t));
+-std::type_index TYPE_INDEX_INT64 = std::type_index(typeid(int64_t));
+-std::type_index TYPE_INDEX_UINT64 = std::type_index(typeid(uint64_t));
++std::type_index TYPE_INDEX_INT8 = std::type_index(typeid(std::int8_t));
++std::type_index TYPE_INDEX_UINT8 = std::type_index(typeid(std::uint8_t));
++std::type_index TYPE_INDEX_INT16 = std::type_index(typeid(std::int16_t));
++std::type_index TYPE_INDEX_UINT16 = std::type_index(typeid(std::uint16_t));
++std::type_index TYPE_INDEX_INT32 = std::type_index(typeid(std::int32_t));
++std::type_index TYPE_INDEX_UINT32 = std::type_index(typeid(std::uint32_t));
++std::type_index TYPE_INDEX_INT64 = std::type_index(typeid(std::int64_t));
++std::type_index TYPE_INDEX_UINT64 = std::type_index(typeid(std::uint64_t));
+ std::type_index TYPE_INDEX_FLOAT = std::type_index(typeid(float));
+ std::type_index TYPE_INDEX_DOUBLE = std::type_index(typeid(double));
+ std::type_index TYPE_INDEX_STRING = std::type_index(typeid(std::string));
+ std::type_index TYPE_INDEX_BYTES = std::type_index(typeid(vector<char>));
+ 
+ std::type_index TYPE_INDEX_BOOL_VEC = std::type_index(typeid(vector<bool>));
+-std::type_index TYPE_INDEX_INT8_VEC = std::type_index(typeid(vector<int8_t>));
+-std::type_index TYPE_INDEX_UINT8_VEC = std::type_index(typeid(vector<uint8_t>));
+-std::type_index TYPE_INDEX_INT16_VEC = std::type_index(typeid(vector<int16_t>));
++std::type_index TYPE_INDEX_INT8_VEC = std::type_index(typeid(vector<std::int8_t>));
++std::type_index TYPE_INDEX_UINT8_VEC = std::type_index(typeid(vector<std::uint8_t>));
++std::type_index TYPE_INDEX_INT16_VEC = std::type_index(typeid(vector<std::int16_t>));
+ std::type_index TYPE_INDEX_UINT16_VEC =
+-    std::type_index(typeid(vector<uint16_t>));
+-std::type_index TYPE_INDEX_INT32_VEC = std::type_index(typeid(vector<int32_t>));
++    std::type_index(typeid(vector<std::uint16_t>));
++std::type_index TYPE_INDEX_INT32_VEC = std::type_index(typeid(vector<std::int32_t>));
+ std::type_index TYPE_INDEX_UINT32_VEC =
+-    std::type_index(typeid(vector<uint32_t>));
+-std::type_index TYPE_INDEX_INT64_VEC = std::type_index(typeid(vector<int64_t>));
++    std::type_index(typeid(vector<std::uint32_t>));
++std::type_index TYPE_INDEX_INT64_VEC = std::type_index(typeid(vector<std::int64_t>));
+ std::type_index TYPE_INDEX_UINT64_VEC =
+-    std::type_index(typeid(vector<uint64_t>));
++    std::type_index(typeid(vector<std::uint64_t>));
+ std::type_index TYPE_INDEX_FLOAT_VEC = std::type_index(typeid(vector<float>));
+ std::type_index TYPE_INDEX_DOUBLE_VEC = std::type_index(typeid(vector<double>));
+ std::type_index TYPE_INDEX_STRING_VEC =
+@@ -59,7 +60,7 @@ std::type_index TYPE_INDEX_BYTES_VEC =
+ 
+ // special, map type
+ std::type_index TYPE_INDEX_MAP_STR_2_INT32 =
+-    std::type_index(typeid(map<string, int32_t>));
++    std::type_index(typeid(map<string, std::int32_t>));
+ std::type_index TYPE_INDEX_MAP_STR_2_VEC_CHAR =
+     std::type_index(typeid(map<string, vector<char>>));
+ std::type_index TYPE_INDEX_MAP_STR_2_STR =

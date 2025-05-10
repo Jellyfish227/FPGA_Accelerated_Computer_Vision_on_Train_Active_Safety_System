@@ -1,0 +1,41 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Sun Nov 10 22:25:36 2024
+# Process ID         : 454942
+# Current directory  : /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_interconnect_axifull_imp_auto_us_0_synth_1
+# Command line       : vivado -log project_1_interconnect_axifull_imp_auto_us_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source project_1_interconnect_axifull_imp_auto_us_0.tcl
+# Log file           : /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_interconnect_axifull_imp_auto_us_0_synth_1/project_1_interconnect_axifull_imp_auto_us_0.vds
+# Journal file       : /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_interconnect_axifull_imp_auto_us_0_synth_1/vivado.jou
+# Running On         : xcosswbld25
+# Platform           : Ubuntu
+# Operating System   : Ubuntu 22.04.2 LTS
+# Processor Detail   : AMD EPYC 7302 16-Core Processor
+# CPU Frequency      : 2994.378 MHz
+# CPU Physical cores : 32
+# CPU Logical cores  : 64
+# Host memory        : 270024 MB
+# Swap memory        : 6774 MB
+# Total Virtual      : 276799 MB
+# Available Virtual  : 232651 MB
+#-----------------------------------------------------------
+INFO: [Common 17-1239] XILINX_LOCAL_USER_DATA is set to 'NO'.
+Sourcing tcl script '/home/xbrbbot/.Xilinx/Vivado/Vivado_init.tcl'
+445 Beta devices matching pattern found, 445 enabled.
+enable_beta_device: Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1515.098 ; gain = 95.027 ; free physical = 109580 ; free virtual = 221595
+invalid command name "internal::enable_all_devices"
+    while executing
+"internal::enable_all_devices"
+    (file "/home/xbrbbot/.Xilinx/Vivado/Vivado_init.tcl" line 2)
+source project_1_interconnect_axifull_imp_auto_us_0.tcl -notrace
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: project_1_interconnect_axifull_imp_auto_us_0
+INFO: [IP_Flow 19-6922] IPCACHE: Exporting cached entry 2cce80bfc1b4adb5 to dir: /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_interconnect_axifull_imp_auto_us_0_synth_1
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.cache/ip/2024.2/2/c/2cce80bfc1b4adb5/project_1_axi_interconnect_lpd_imp_auto_us_0_stub.vhdl to /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_interconnect_axifull_imp_auto_us_0_synth_1/project_1_interconnect_axifull_imp_auto_us_0_stub.vhdl.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.cache/ip/2024.2/2/c/2cce80bfc1b4adb5/project_1_axi_interconnect_lpd_imp_auto_us_0_stub.v to /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_interconnect_axifull_imp_auto_us_0_synth_1/project_1_interconnect_axifull_imp_auto_us_0_stub.v.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.cache/ip/2024.2/2/c/2cce80bfc1b4adb5/project_1_axi_interconnect_lpd_imp_auto_us_0_sim_netlist.v to /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_interconnect_axifull_imp_auto_us_0_synth_1/project_1_interconnect_axifull_imp_auto_us_0_sim_netlist.v.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.cache/ip/2024.2/2/c/2cce80bfc1b4adb5/project_1_axi_interconnect_lpd_imp_auto_us_0_sim_netlist.vhdl to /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_interconnect_axifull_imp_auto_us_0_synth_1/project_1_interconnect_axifull_imp_auto_us_0_sim_netlist.vhdl.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.cache/ip/2024.2/2/c/2cce80bfc1b4adb5/project_1_axi_interconnect_lpd_imp_auto_us_0.dcp to /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_interconnect_axifull_imp_auto_us_0_synth_1/project_1_interconnect_axifull_imp_auto_us_0.dcp.
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP project_1_interconnect_axifull_imp_auto_us_0, cache-ID = 2cce80bfc1b4adb5.
+INFO: [Common 17-206] Exiting Vivado at Sun Nov 10 22:26:00 2024...

@@ -1,0 +1,296 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Sun Nov 10 22:23:43 2024
+# Process ID         : 452914
+# Current directory  : /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_axi_register_slice_0_0_synth_1
+# Command line       : vivado -log project_1_axi_register_slice_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source project_1_axi_register_slice_0_0.tcl
+# Log file           : /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_axi_register_slice_0_0_synth_1/project_1_axi_register_slice_0_0.vds
+# Journal file       : /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_axi_register_slice_0_0_synth_1/vivado.jou
+# Running On         : xcosswbld25
+# Platform           : Ubuntu
+# Operating System   : Ubuntu 22.04.2 LTS
+# Processor Detail   : AMD EPYC 7302 16-Core Processor
+# CPU Frequency      : 3242.892 MHz
+# CPU Physical cores : 32
+# CPU Logical cores  : 64
+# Host memory        : 270024 MB
+# Swap memory        : 6774 MB
+# Total Virtual      : 276799 MB
+# Available Virtual  : 236998 MB
+#-----------------------------------------------------------
+INFO: [Common 17-1239] XILINX_LOCAL_USER_DATA is set to 'NO'.
+Sourcing tcl script '/home/xbrbbot/.Xilinx/Vivado/Vivado_init.tcl'
+445 Beta devices matching pattern found, 445 enabled.
+enable_beta_device: Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1514.129 ; gain = 95.027 ; free physical = 105999 ; free virtual = 217934
+invalid command name "internal::enable_all_devices"
+    while executing
+"internal::enable_all_devices"
+    (file "/home/xbrbbot/.Xilinx/Vivado/Vivado_init.tcl" line 2)
+source project_1_axi_register_slice_0_0.tcl -notrace
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: project_1_axi_register_slice_0_0
+Command: synth_design -top project_1_axi_register_slice_0_0 -part xczu9eg-ffvb1156-2-e -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xczu9eg'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xczu9eg'
+INFO: [Device 21-403] Loading part xczu9eg-ffvb1156-2-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 7 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 453323
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2650.102 ; gain = 132.625 ; free physical = 87669 ; free virtual = 199642
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'project_1_axi_register_slice_0_0' [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ip/project_1_axi_register_slice_0_0/synth/project_1_axi_register_slice_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'axi_register_slice_v2_1_33_axi_register_slice' [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/3ee4/hdl/axi_register_slice_v2_1_vl_rfs.v:3721]
+INFO: [Synth 8-6157] synthesizing module 'axi_infrastructure_v1_1_0_axi2vector' [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/ec67/hdl/axi_infrastructure_v1_1_vl_rfs.v:59]
+INFO: [Synth 8-6155] done synthesizing module 'axi_infrastructure_v1_1_0_axi2vector' (0#1) [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/ec67/hdl/axi_infrastructure_v1_1_vl_rfs.v:59]
+INFO: [Synth 8-6157] synthesizing module 'axi_infrastructure_v1_1_0_vector2axi' [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/ec67/hdl/axi_infrastructure_v1_1_vl_rfs.v:473]
+INFO: [Synth 8-6155] done synthesizing module 'axi_infrastructure_v1_1_0_vector2axi' (0#1) [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/ec67/hdl/axi_infrastructure_v1_1_vl_rfs.v:473]
+INFO: [Synth 8-6157] synthesizing module 'axi_register_slice_v2_1_33_axic_register_slice' [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/3ee4/hdl/axi_register_slice_v2_1_vl_rfs.v:1492]
+INFO: [Synth 8-6155] done synthesizing module 'axi_register_slice_v2_1_33_axic_register_slice' (0#1) [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/3ee4/hdl/axi_register_slice_v2_1_vl_rfs.v:1492]
+INFO: [Synth 8-6157] synthesizing module 'axi_register_slice_v2_1_33_axic_register_slice__parameterized0' [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/3ee4/hdl/axi_register_slice_v2_1_vl_rfs.v:1492]
+INFO: [Synth 8-6155] done synthesizing module 'axi_register_slice_v2_1_33_axic_register_slice__parameterized0' (0#1) [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/3ee4/hdl/axi_register_slice_v2_1_vl_rfs.v:1492]
+INFO: [Synth 8-6157] synthesizing module 'axi_register_slice_v2_1_33_axic_register_slice__parameterized1' [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/3ee4/hdl/axi_register_slice_v2_1_vl_rfs.v:1492]
+INFO: [Synth 8-6155] done synthesizing module 'axi_register_slice_v2_1_33_axic_register_slice__parameterized1' (0#1) [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/3ee4/hdl/axi_register_slice_v2_1_vl_rfs.v:1492]
+INFO: [Synth 8-6157] synthesizing module 'axi_register_slice_v2_1_33_axic_register_slice__parameterized2' [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/3ee4/hdl/axi_register_slice_v2_1_vl_rfs.v:1492]
+INFO: [Synth 8-6155] done synthesizing module 'axi_register_slice_v2_1_33_axic_register_slice__parameterized2' (0#1) [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/3ee4/hdl/axi_register_slice_v2_1_vl_rfs.v:1492]
+INFO: [Synth 8-6155] done synthesizing module 'axi_register_slice_v2_1_33_axi_register_slice' (0#1) [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ipshared/3ee4/hdl/axi_register_slice_v2_1_vl_rfs.v:3721]
+INFO: [Synth 8-6155] done synthesizing module 'project_1_axi_register_slice_0_0' (0#1) [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ip/project_1_axi_register_slice_0_0/synth/project_1_axi_register_slice_0_0.v:53]
+WARNING: [Synth 8-7129] Port s_axi_wid[15] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[14] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[13] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[12] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[11] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[10] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[9] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[8] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[7] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[6] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[5] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[4] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[3] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[2] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[1] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[0] in module axi_infrastructure_v1_1_0_axi2vector is either unconnected or has no load
+WARNING: [Synth 8-7129] Port aclk2x in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2728.070 ; gain = 210.594 ; free physical = 86213 ; free virtual = 198198
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2731.039 ; gain = 213.562 ; free physical = 86191 ; free virtual = 198175
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2731.039 ; gain = 213.562 ; free physical = 86191 ; free virtual = 198175
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2731.039 ; gain = 0.000 ; free physical = 86148 ; free virtual = 198132
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ip/project_1_axi_register_slice_0_0/project_1_axi_register_slice_0_0_ooc.xdc] for cell 'inst'
+create_clock: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2829.789 ; gain = 6.062 ; free physical = 83971 ; free virtual = 195964
+Finished Parsing XDC File [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ip/project_1_axi_register_slice_0_0/project_1_axi_register_slice_0_0_ooc.xdc] for cell 'inst'
+Parsing XDC File [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_axi_register_slice_0_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_axi_register_slice_0_0_synth_1/dont_touch.xdc]
+Parsing XDC File [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ip/project_1_axi_register_slice_0_0/project_1_axi_register_slice_0_0_clocks.xdc] for cell 'inst'
+Finished Parsing XDC File [/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.gen/sources_1/bd/project_1/ip/project_1_axi_register_slice_0_0/project_1_axi_register_slice_0_0_clocks.xdc] for cell 'inst'
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2829.789 ; gain = 0.000 ; free physical = 83971 ; free virtual = 195963
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.04 . Memory (MB): peak = 2829.789 ; gain = 0.000 ; free physical = 83967 ; free virtual = 195958
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2829.789 ; gain = 312.312 ; free physical = 83895 ; free virtual = 195898
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xczu9eg-ffvb1156-2-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2831.793 ; gain = 314.316 ; free physical = 83893 ; free virtual = 195896
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for inst. (constraint file  /tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_axi_register_slice_0_0_synth_1/dont_touch.xdc, line 9).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2831.793 ; gain = 314.316 ; free physical = 83884 ; free virtual = 195887
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2831.793 ; gain = 314.316 ; free physical = 83861 ; free virtual = 195866
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	              148 Bit    Registers := 2     
+	              146 Bit    Registers := 2     
+	              101 Bit    Registers := 2     
+	               19 Bit    Registers := 1     
+	                2 Bit    Registers := 5     
+	                1 Bit    Registers := 10    
++---Muxes : 
+	   2 Input  148 Bit        Muxes := 2     
+	   2 Input  146 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 6     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 2520 (col length:168)
+BRAMs: 1824 (col length: RAMB18 168 RAMB36 84)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-7129] Port aclk2x in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[15] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[14] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[13] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[12] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[11] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[10] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[9] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[8] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[7] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[6] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[5] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[4] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[3] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[2] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[1] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+WARNING: [Synth 8-7129] Port s_axi_wid[0] in module axi_register_slice_v2_1_33_axi_register_slice is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2831.793 ; gain = 314.316 ; free physical = 83703 ; free virtual = 195711
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 3415.836 ; gain = 898.359 ; free physical = 76845 ; free virtual = 188857
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 3426.852 ; gain = 909.375 ; free physical = 76775 ; free virtual = 188787
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:32 ; elapsed = 00:00:34 . Memory (MB): peak = 3442.867 ; gain = 925.391 ; free physical = 77162 ; free virtual = 189173
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:36 ; elapsed = 00:00:37 . Memory (MB): peak = 3590.680 ; gain = 1073.203 ; free physical = 77939 ; free virtual = 189951
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:36 ; elapsed = 00:00:37 . Memory (MB): peak = 3590.680 ; gain = 1073.203 ; free physical = 77950 ; free virtual = 189961
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 3590.680 ; gain = 1073.203 ; free physical = 77970 ; free virtual = 189981
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 3590.680 ; gain = 1073.203 ; free physical = 77969 ; free virtual = 189981
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 3590.680 ; gain = 1073.203 ; free physical = 77960 ; free virtual = 189971
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 3590.680 ; gain = 1073.203 ; free physical = 77959 ; free virtual = 189970
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |LUT1 |     6|
+|2     |LUT2 |     2|
+|3     |LUT3 |   295|
+|4     |LUT4 |     7|
+|5     |FDRE |   816|
++------+-----+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 3590.680 ; gain = 1073.203 ; free physical = 77958 ; free virtual = 189969
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 18 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:29 ; elapsed = 00:00:30 . Memory (MB): peak = 3590.680 ; gain = 974.453 ; free physical = 77856 ; free virtual = 189867
+Synthesis Optimization Complete : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 3590.680 ; gain = 1073.203 ; free physical = 77860 ; free virtual = 189872
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3590.680 ; gain = 0.000 ; free physical = 78138 ; free virtual = 190150
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3590.680 ; gain = 0.000 ; free physical = 77637 ; free virtual = 189653
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 2b28251a
+INFO: [Common 17-83] Releasing license: Synthesis
+31 Infos, 35 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:47 ; elapsed = 00:00:48 . Memory (MB): peak = 3590.680 ; gain = 2004.316 ; free physical = 77579 ; free virtual = 189595
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2534.248; main = 2534.248; forked = 175.048
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 4125.664; main = 3530.879; forked = 896.371
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3590.680 ; gain = 0.000 ; free physical = 77533 ; free virtual = 189549
+INFO: [Common 17-1381] The checkpoint '/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_axi_register_slice_0_0_synth_1/project_1_axi_register_slice_0_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP project_1_axi_register_slice_0_0, cache-ID = 752d3388ac1427ae
+INFO: [Coretcl 2-1174] Renamed 6 cell refs.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3590.680 ; gain = 0.000 ; free physical = 77409 ; free virtual = 189416
+INFO: [Common 17-1381] The checkpoint '/tmp/tmp.t0bhEaqsGc/temp/hwflow/hwflow_project_1/project_1.runs/project_1_axi_register_slice_0_0_synth_1/project_1_axi_register_slice_0_0.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file project_1_axi_register_slice_0_0_utilization_synth.rpt -pb project_1_axi_register_slice_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sun Nov 10 22:25:06 2024...

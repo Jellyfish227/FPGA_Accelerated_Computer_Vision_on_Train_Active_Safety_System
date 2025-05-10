@@ -1,0 +1,404 @@
+From 6335418e09537ba19e88207663947e608d972032 Mon Sep 17 00:00:00 2001
+From: Hyunok Kim <hokim@inipro.net>
+Date: Wed, 25 Dec 2024 16:36:43 +0000
+Subject: [PATCH] Fix cstdint include missing and outside array bounds errors
+
+Signed-off-by: Hyunok Kim <hokim@inipro.net>
+---
+ .../async-runner/src/batch_tensor_buffer.cpp  |   3 +-
+ .../src/batch_tensor_buffer.cpp               |   6 +-
+ .../runner/include/vitis/ai/dpu_runner.hpp    |   0
+ .../vart/runner/include/vitis/ai/runner.hpp   |   0
+ .../vart/runner/include/vitis/ai/tensor.hpp   |   1 +
+ .../vart/trace/include/vitis/ai/event.hpp     |  13 ++-
+ .../vaitraceTools/mem_perf/xapm/apm.cpp       |   0
+ .../mem_perf/xapm/include/apm.hpp             |   0
+ .../vart/util/include/vart/util_4bit.hpp      | 103 +++++++++---------
+ .../util/include/vitis/ai/parse_value.hpp     |   5 +-
+ 10 files changed, 69 insertions(+), 62 deletions(-)
+ mode change 100755 => 100644 src/vai_runtime/vart/runner/include/vitis/ai/dpu_runner.hpp
+ mode change 100755 => 100644 src/vai_runtime/vart/runner/include/vitis/ai/runner.hpp
+ mode change 100755 => 100644 src/vai_runtime/vart/runner/include/vitis/ai/tensor.hpp
+ mode change 100755 => 100644 src/vai_runtime/vart/trace/vaitrace/vaitraceTools/mem_perf/xapm/apm.cpp
+ mode change 100755 => 100644 src/vai_runtime/vart/trace/vaitrace/vaitraceTools/mem_perf/xapm/include/apm.hpp
+
+diff --git a/src/vai_runtime/vart/async-runner/src/batch_tensor_buffer.cpp b/src/vai_runtime/vart/async-runner/src/batch_tensor_buffer.cpp
+index c8e5de760..9b380e590 100644
+--- a/src/vai_runtime/vart/async-runner/src/batch_tensor_buffer.cpp
++++ b/src/vai_runtime/vart/async-runner/src/batch_tensor_buffer.cpp
+@@ -86,7 +86,8 @@ BatchTensorBuffer ::~BatchTensorBuffer() {}
+ std::pair<uint64_t, size_t> BatchTensorBuffer::data(
+     const std::vector<int> idx) {
+   if (idx.empty()) {
+-    return tensor_buffers_[0]->data(idx);
++    //return tensor_buffers_[0]->data(idx);
++	return std::pair<uint64_t, size_t>();
+   }
+   size_t tb_idx = 0u;
+   int batch = 0;
+diff --git a/src/vai_runtime/vart/dpu-controller/runner-assistant/src/batch_tensor_buffer.cpp b/src/vai_runtime/vart/dpu-controller/runner-assistant/src/batch_tensor_buffer.cpp
+index aaf7580b4..37bb8946a 100644
+--- a/src/vai_runtime/vart/dpu-controller/runner-assistant/src/batch_tensor_buffer.cpp
++++ b/src/vai_runtime/vart/dpu-controller/runner-assistant/src/batch_tensor_buffer.cpp
+@@ -106,9 +106,11 @@ std::pair<uint64_t, size_t> BatchTensorBuffer::xdata(
+     const std::vector<int>& idx, int is_phy) {
+   if (idx.empty()) {
+     if (is_phy) {
+-      return tensor_buffers_[0]->data_phy(idx);
++      //return tensor_buffers_[0]->data_phy(idx);
++	  return std::pair<uint64_t, size_t>();
+     } else {
+-      return tensor_buffers_[0]->data(idx);
++      //return tensor_buffers_[0]->data(idx);
++	  return std::pair<uint64_t, size_t>();
+     }
+   }
+   auto tb_pair = get_tb_idx(idx[0]);
+diff --git a/src/vai_runtime/vart/runner/include/vitis/ai/dpu_runner.hpp b/src/vai_runtime/vart/runner/include/vitis/ai/dpu_runner.hpp
+old mode 100755
+new mode 100644
+diff --git a/src/vai_runtime/vart/runner/include/vitis/ai/runner.hpp b/src/vai_runtime/vart/runner/include/vitis/ai/runner.hpp
+old mode 100755
+new mode 100644
+diff --git a/src/vai_runtime/vart/runner/include/vitis/ai/tensor.hpp b/src/vai_runtime/vart/runner/include/vitis/ai/tensor.hpp
+old mode 100755
+new mode 100644
+index 2191fffc8..8f05bfc0a
+--- a/src/vai_runtime/vart/runner/include/vitis/ai/tensor.hpp
++++ b/src/vai_runtime/vart/runner/include/vitis/ai/tensor.hpp
+@@ -15,6 +15,7 @@
+  */
+ #pragma once
+ 
++#include <cstdint>
+ #include <string>
+ #include <vector>
+ 
+diff --git a/src/vai_runtime/vart/trace/include/vitis/ai/event.hpp b/src/vai_runtime/vart/trace/include/vitis/ai/event.hpp
+index 20b9dda6a..c35c7b2a4 100644
+--- a/src/vai_runtime/vart/trace/include/vitis/ai/event.hpp
++++ b/src/vai_runtime/vart/trace/include/vitis/ai/event.hpp
+@@ -15,6 +15,7 @@
+  */
+ 
+ #pragma once
++#include <cstdint>
+ #include <stdlib.h>
+ #include <iostream>
+ #include <map>
+@@ -22,7 +23,7 @@
+ #include <string>
+ #include <utility>
+ #if _WIN32
+-using MY_DWORD = uint32_t;
++using MY_DWORD = std::uint32_t;
+ // MSVC NOTE: it is dangerous to include windows.h in public header files. it
+ // introduces too many MACROS, like, max,min, CONST etc, which leads to many
+ // strange compilation errors. so we should avoid include windows.h in public
+@@ -49,26 +50,26 @@ struct traceTimestamp {
+   TraceEventTimeType type;
+   union {
+     double ts;
+-    uint64_t tsc;
++    std::uint64_t tsc;
+   };
+ };
+ 
+ #pragma pack(push, 1)
+ class traceEventBase {
+  public:
+-  traceEventBase(size_t payload_size = 0);
++  traceEventBase(std::size_t payload_size = 0);
+   virtual ~traceEventBase(){};
+   virtual trace_entry_t get(void);
+-  inline size_t get_size(void) { return size_; };
++  inline std::size_t get_size(void) { return size_; };
+ 
+  public:
+-  uint16_t size_;
++  std::uint16_t size_;
+ #if _WIN32
+   MY_DWORD pid;
+ #else
+   pid_t pid;
+ #endif
+-  uint8_t cpu_id;
++  std::uint8_t cpu_id;
+   // struct traceTimestamp ts;
+   double ts;
+ };
+diff --git a/src/vai_runtime/vart/trace/vaitrace/vaitraceTools/mem_perf/xapm/apm.cpp b/src/vai_runtime/vart/trace/vaitrace/vaitraceTools/mem_perf/xapm/apm.cpp
+old mode 100755
+new mode 100644
+diff --git a/src/vai_runtime/vart/trace/vaitrace/vaitraceTools/mem_perf/xapm/include/apm.hpp b/src/vai_runtime/vart/trace/vaitrace/vaitraceTools/mem_perf/xapm/include/apm.hpp
+old mode 100755
+new mode 100644
+diff --git a/src/vai_runtime/vart/util/include/vart/util_4bit.hpp b/src/vai_runtime/vart/util/include/vart/util_4bit.hpp
+index 739e178bf..7bd74d6e3 100644
+--- a/src/vai_runtime/vart/util/include/vart/util_4bit.hpp
++++ b/src/vai_runtime/vart/util/include/vart/util_4bit.hpp
+@@ -15,6 +15,7 @@
+  */
+ #pragma once
+ 
++#include <cstdint>
+ #include <iomanip>
+ #include <iostream>
+ #include <sstream>
+@@ -29,7 +30,7 @@ class Bit4 {
+ 
+  protected:
+   Bit4() : data_{}, pos_(Pos::LOW), if_signed_(true) {
+-    data_.i = int8_t(0);
++    data_.i = std::int8_t(0);
+   }
+   ~Bit4() = default;
+ 
+@@ -42,12 +43,12 @@ class Bit4 {
+                                         !std::is_same<bool, T>::value,
+                                     int>::type = 0>
+   void set_value(T t, Pos pos = Pos::LOW) {
+-    data_.i = *(int8_t*)(&t);
++    data_.i = *(std::int8_t*)(&t);
+     set_valid_pos(pos);
+   }
+ 
+-  int8_t get_origin_int8() const { return data_.i; }
+-  uint8_t get_origin_uint8() const { return data_.u; }
++  std::int8_t get_origin_int8() const { return data_.i; }
++  std::uint8_t get_origin_uint8() const { return data_.u; }
+ 
+   // funcs for output
+   void print() const { std::cout << get_dbg_str() << std::endl; }
+@@ -71,7 +72,7 @@ class Bit4 {
+     s += ", origin hex: 0x";
+     std::ostringstream ostr;
+     ostr << std::hex << std::setw(2) << std::setfill('0')
+-         << (uint32_t)(data_.u);
++         << (std::uint32_t)(data_.u);
+     s += ostr.str();
+     ostr.str("");
+ 
+@@ -88,24 +89,24 @@ class Bit4 {
+       if (pos_ == Pos::LOW) {
+         ostr << std::dec << (int)data_.ib.first << "(0x";
+         ostr << std::hex << std::setw(1) << std::setfill('0')
+-             << (uint32_t)(data_.ub.first);
++             << (std::uint32_t)(data_.ub.first);
+         ostr << ")";
+       } else {
+         ostr << std::dec << (int)data_.ib.second << "(0x";
+         ostr << std::hex << std::setw(1) << std::setfill('0')
+-             << (uint32_t)(data_.ub.second);
++             << (std::uint32_t)(data_.ub.second);
+         ostr << ")";
+       }
+     } else {
+       if (pos_ == Pos::LOW) {
+-        ostr << std::dec << (uint32_t)data_.ub.first << "(0x";
++        ostr << std::dec << (std::uint32_t)data_.ub.first << "(0x";
+         ostr << std::hex << std::setw(1) << std::setfill('0')
+-             << (uint32_t)(data_.ub.first);
++             << (std::uint32_t)(data_.ub.first);
+         ostr << ")";
+       } else {
+-        ostr << std::dec << (uint32_t)data_.ub.second << "(0x";
++        ostr << std::dec << (std::uint32_t)data_.ub.second << "(0x";
+         ostr << std::hex << std::setw(1) << std::setfill('0')
+-             << (uint32_t)(data_.ub.second);
++             << (std::uint32_t)(data_.ub.second);
+         ostr << ")";
+       }
+     }
+@@ -117,15 +118,15 @@ class Bit4 {
+ 
+  protected:
+   struct InternalBit4 {
+-    int8_t first : 4, second : 4;
++    std::int8_t first : 4, second : 4;
+   };
+   struct InternalUBit4 {
+-    uint8_t first : 4, second : 4;
++    std::uint8_t first : 4, second : 4;
+   };
+ 
+   union InternalData {
+-    int8_t i;
+-    uint8_t u;
++    std::int8_t i;
++    std::uint8_t u;
+     InternalBit4 ib;
+     InternalUBit4 ub;
+   };
+@@ -151,12 +152,12 @@ class SignedBit4 : public Bit4 {
+                                     int>::type = 0>
+   SignedBit4(T i, Pos pos = Pos::LOW) {
+     if_signed_ = true;
+-    data_.i = *(int8_t*)(&i);
++    data_.i = *(std::int8_t*)(&i);
+     set_valid_pos(pos);
+   }
+ 
+  public:
+-  int8_t get_value() const {
++  std::int8_t get_value() const {
+     if (pos_ == Pos::LOW)
+       return data_.ib.first;
+     else
+@@ -180,12 +181,12 @@ class UnsignedBit4 : public Bit4 {
+                                     int>::type = 0>
+   UnsignedBit4(T u, Pos pos = Pos::LOW) {
+     if_signed_ = false;
+-    data_.u = *(uint8_t*)(&u);
++    data_.u = *(std::uint8_t*)(&u);
+     set_valid_pos(pos);
+   }
+ 
+  public:
+-  uint8_t get_value() const {
++  std::uint8_t get_value() const {
+     if (pos_ == Pos::LOW)
+       return data_.ub.first;
+     else
+@@ -198,10 +199,10 @@ inline bool operator==(const SignedBit4& a, const SignedBit4& b) {
+   return a.get_value() == b.get_value();
+ }
+ inline bool operator==(const SignedBit4& a, const UnsignedBit4& b) {
+-  return a.get_value() == (int8_t)b.get_value();
++  return a.get_value() == (std::int8_t)b.get_value();
+ }
+ inline bool operator==(const UnsignedBit4& a, const SignedBit4& b) {
+-  return (int8_t)a.get_value() == b.get_value();
++  return (std::int8_t)a.get_value() == b.get_value();
+ }
+ inline bool operator==(const UnsignedBit4& a, const UnsignedBit4& b) {
+   return a.get_value() == b.get_value();
+@@ -222,41 +223,41 @@ inline bool operator!=(const UnsignedBit4& a, const UnsignedBit4& b) {
+ }
+ 
+ // overload operator +
+-inline int8_t operator+(const SignedBit4& a, const SignedBit4& b) {
++inline std::int8_t operator+(const SignedBit4& a, const SignedBit4& b) {
+   return a.get_value() + b.get_value();
+ }
+-inline int8_t operator+(const SignedBit4& a, const UnsignedBit4& b) {
+-  return a.get_value() + (int8_t)b.get_value();
++inline std::int8_t operator+(const SignedBit4& a, const UnsignedBit4& b) {
++  return a.get_value() + (std::int8_t)b.get_value();
+ }
+-inline int8_t operator+(const UnsignedBit4& a, const SignedBit4& b) {
+-  return (int8_t)a.get_value() + b.get_value();
++inline std::int8_t operator+(const UnsignedBit4& a, const SignedBit4& b) {
++  return (std::int8_t)a.get_value() + b.get_value();
+ }
+-inline int8_t operator+(const UnsignedBit4& a, const UnsignedBit4& b) {
+-  return (int8_t)a.get_value() + (int8_t)b.get_value();
++inline std::int8_t operator+(const UnsignedBit4& a, const UnsignedBit4& b) {
++  return (std::int8_t)a.get_value() + (std::int8_t)b.get_value();
+ }
+ 
+ // overload operator *
+-inline int8_t operator*(const SignedBit4& a, const SignedBit4& b) {
++inline std::int8_t operator*(const SignedBit4& a, const SignedBit4& b) {
+   return a.get_value() * b.get_value();
+ }
+-inline int8_t operator*(const SignedBit4& a, const UnsignedBit4& b) {
+-  return a.get_value() * (int8_t)b.get_value();
++inline std::int8_t operator*(const SignedBit4& a, const UnsignedBit4& b) {
++  return a.get_value() * (std::int8_t)b.get_value();
+ }
+-inline int8_t operator*(const UnsignedBit4& a, const SignedBit4& b) {
+-  return (int8_t)a.get_value() * b.get_value();
++inline std::int8_t operator*(const UnsignedBit4& a, const SignedBit4& b) {
++  return (std::int8_t)a.get_value() * b.get_value();
+ }
+-inline int8_t operator*(const UnsignedBit4& a, const UnsignedBit4& b) {
+-  return (int8_t)a.get_value() * (int8_t)b.get_value();
++inline std::int8_t operator*(const UnsignedBit4& a, const UnsignedBit4& b) {
++  return (std::int8_t)a.get_value() * (std::int8_t)b.get_value();
+ }
+ 
+-void bump_idx(std::vector<int32_t>& idx, const std::vector<int32_t>& shape);
+-void bump_idx(std::vector<int32_t>& idx, const std::vector<uint32_t>& shape);
++void bump_idx(std::vector<std::int32_t>& idx, const std::vector<std::int32_t>& shape);
++void bump_idx(std::vector<std::int32_t>& idx, const std::vector<std::uint32_t>& shape);
+ 
+ template <typename T>
+-void dt_2_unsigned4bit(T* src, uint8_t* dst, int num,
+-                       std::vector<int32_t> shape,
+-                       std::vector<int32_t> stride) {
+-  auto idx = std::vector<int32_t>(shape.size(), 0);
++void dt_2_unsigned4bit(T* src, std::uint8_t* dst, int num,
++                       std::vector<std::int32_t> shape,
++                       std::vector<std::int32_t> stride) {
++  auto idx = std::vector<std::int32_t>(shape.size(), 0);
+   for (auto i = 0; i < num; i++) {
+     auto offset = 0U;
+     for (auto k = 0U; k < idx.size(); k++) {
+@@ -272,15 +273,15 @@ void dt_2_unsigned4bit(T* src, uint8_t* dst, int num,
+ }
+ 
+ template <typename T>
+-void dt_2_signed4bit(T* src, int8_t* dst, int num, std::vector<int32_t> shape,
+-                     std::vector<int32_t> stride) {
+-  dt_2_unsigned4bit(src, reinterpret_cast<uint8_t*>(dst), num, shape, stride);
++void dt_2_signed4bit(T* src, std::int8_t* dst, int num, std::vector<std::int32_t> shape,
++                     std::vector<std::int32_t> stride) {
++  dt_2_unsigned4bit(src, reinterpret_cast<std::uint8_t*>(dst), num, shape, stride);
+ }
+ 
+ template <typename T>
+-void signed4bit_2_dt(int8_t* src, T* dst, int32_t num,
+-                     std::vector<int32_t> shape, std::vector<int32_t> stride) {
+-  auto idx = std::vector<int32_t>(shape.size(), 0);
++void signed4bit_2_dt(std::int8_t* src, T* dst, std::int32_t num,
++                     std::vector<std::int32_t> shape, std::vector<std::int32_t> stride) {
++  auto idx = std::vector<std::int32_t>(shape.size(), 0);
+   for (auto i = 0; i < num; i++) {
+     auto offset = 0U;
+     for (auto k = 0U; k < idx.size(); k++) {
+@@ -293,10 +294,10 @@ void signed4bit_2_dt(int8_t* src, T* dst, int32_t num,
+ }
+ 
+ template <typename T>
+-void unsigned4bit_2_dt(uint8_t* src, T* dst, int num,
+-                       std::vector<int32_t> shape,
+-                       std::vector<int32_t> stride) {
+-  auto idx = std::vector<int32_t>(shape.size(), 0);
++void unsigned4bit_2_dt(std::uint8_t* src, T* dst, int num,
++                       std::vector<std::int32_t> shape,
++                       std::vector<std::int32_t> stride) {
++  auto idx = std::vector<std::int32_t>(shape.size(), 0);
+   for (auto i = 0; i < num; i++) {
+     auto offset = 0U;
+     for (auto k = 0U; k < idx.size(); k++) {
+diff --git a/src/vai_runtime/vart/util/include/vitis/ai/parse_value.hpp b/src/vai_runtime/vart/util/include/vitis/ai/parse_value.hpp
+index 9a6f71412..897c3f454 100644
+--- a/src/vai_runtime/vart/util/include/vitis/ai/parse_value.hpp
++++ b/src/vai_runtime/vart/util/include/vitis/ai/parse_value.hpp
+@@ -14,6 +14,7 @@
+  * limitations under the License.
+  */
+ #pragma once
++#include <cstdint>
+ #include <cassert>
+ #include <sstream>
+ namespace vitis {
+@@ -38,7 +39,7 @@ inline void parse_value(const std::string& text, long long& value) {
+   }
+ }
+ 
+-inline void parse_value(const std::string& text, uint32_t& value) {
++inline void parse_value(const std::string& text, std::uint32_t& value) {
+   if (text.size() > 2 && text[0] == '0' && text[1] == 'x') {
+     value = stoul(text.substr(2), 0, 16);
+   } else {
+@@ -46,7 +47,7 @@ inline void parse_value(const std::string& text, uint32_t& value) {
+   }
+ }
+ 
+-inline void parse_value(const std::string& text, uint64_t& value) {
++inline void parse_value(const std::string& text, std::uint64_t& value) {
+   if (text.size() > 2 && text[0] == '0' && text[1] == 'x') {
+     value = stoull(text.substr(2), 0, 16);
+   } else {

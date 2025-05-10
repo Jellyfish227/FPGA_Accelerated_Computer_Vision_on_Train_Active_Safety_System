@@ -1,0 +1,175 @@
+From 65fe38b3551ecffefff446599786641db33b0a6f Mon Sep 17 00:00:00 2001
+From: Hyunok Kim <hokim@inipro.net>
+Date: Wed, 25 Dec 2024 19:42:12 +0000
+Subject: [PATCH] Fix headers and libraries missing
+
+Signed-off-by: Hyunok Kim <hokim@inipro.net>
+---
+ src/vai_library/CMakeLists.txt                               | 1 +
+ src/vai_library/clocs/src/scatter.hpp                        | 5 +++--
+ src/vai_library/cpu_task/CMakeLists.txt                      | 2 +-
+ src/vai_library/model_config/src/config.cpp                  | 2 ++
+ src/vai_library/pointpillars/CMakeLists.txt                  | 2 +-
+ src/vai_library/xmodel_image/CMakeLists.txt                  | 2 +-
+ .../xmodel_image/samples/test_jpeg_xmodel_image.cpp          | 2 +-
+ src/vai_library/xmodel_jit/CMakeLists.txt                    | 2 +-
+ src/vai_library/xnnpp/CMakeLists.txt                         | 3 ++-
+ src/vai_library/xnnpp/src/tfssd/tfssd_post.cpp               | 4 +++-
+ 10 files changed, 16 insertions(+), 9 deletions(-)
+
+diff --git a/src/vai_library/CMakeLists.txt b/src/vai_library/CMakeLists.txt
+index 4fbc83ba6..5f27ab493 100644
+--- a/src/vai_library/CMakeLists.txt
++++ b/src/vai_library/CMakeLists.txt
+@@ -171,6 +171,7 @@ find_package(
+              trace
+   REQUIRED)
+ find_package(Protobuf 3.4.0 REQUIRED)
++find_package(absl REQUIRED)
+ find_package(Eigen3 REQUIRED)
+ find_package(Xrt MODULE)
+ find_package(OpenCV COMPONENTS opencv_core opencv_video opencv_videoio
+diff --git a/src/vai_library/clocs/src/scatter.hpp b/src/vai_library/clocs/src/scatter.hpp
+index 405e143c6..8a769c83f 100644
+--- a/src/vai_library/clocs/src/scatter.hpp
++++ b/src/vai_library/clocs/src/scatter.hpp
+@@ -14,6 +14,7 @@
+  * limitations under the License.
+  */
+ #pragma once
++#include <cstdint>
+ #include <string>
+ #include <utility>
+ #include <vector>
+@@ -23,8 +24,8 @@ namespace ai {
+ namespace clocs {
+ 
+ void scatter(const std::vector<int>& coors, int coors_dim,
+-             const int8_t* input_data, float input_scale, int8_t* output_data,
+-             float output_scale, uint32_t in_channels = 64, int nx = 400,
++             const std::int8_t* input_data, float input_scale, std::int8_t* output_data,
++             float output_scale, std::uint32_t in_channels = 64, int nx = 400,
+              int ny = 400);
+ }  // namespace clocs
+ }  // namespace ai
+diff --git a/src/vai_library/cpu_task/CMakeLists.txt b/src/vai_library/cpu_task/CMakeLists.txt
+index a77657891..b7471c6c0 100644
+--- a/src/vai_library/cpu_task/CMakeLists.txt
++++ b/src/vai_library/cpu_task/CMakeLists.txt
+@@ -132,7 +132,7 @@ if(BUILD_PYTHON)
+   add_op_imp(python-cpu-op ops/python-cpu-op/python-cpu-op.cpp)
+   if(CMAKE_CROSSCOMPILING)
+     set_target_properties(python-cpu-op PROPERTIES INCLUDE_DIRECTORIES
+-                                                   ${VAI_PYTHON_INCLUDE_DIRS})
++                                                   "${VAI_PYTHON_INCLUDE_DIRS};${PYBIND11_PATH}")
+     target_link_libraries(python-cpu-op PRIVATE -l${VAI_PYTHON_LIB})
+   else(CMAKE_CROSSCOMPILING)
+     target_link_libraries(python-cpu-op PRIVATE ${PYTHON_LIBRARIES} vart::util)
+diff --git a/src/vai_library/model_config/src/config.cpp b/src/vai_library/model_config/src/config.cpp
+index d9202b084..08d2c2c59 100644
+--- a/src/vai_library/model_config/src/config.cpp
++++ b/src/vai_library/model_config/src/config.cpp
+@@ -124,10 +124,12 @@ static std::shared_ptr<vitis::ai::proto::DpuModelParamList> instance() {
+   static std::shared_ptr<vitis::ai::proto::DpuModelParamList> ret;
+   std::lock_guard<std::mutex> lock(*mutex.get());
+   if (!ret) {
++	/*
+     google::protobuf::LogSilencer* s1 = new google::protobuf::LogSilencer;
+     if (0) {
+       std::cerr << "suppress warning of unused variable " << s1 << std::endl;
+     }
++	*/
+     ret = create();
+   }
+   assert(ret != nullptr);
+diff --git a/src/vai_library/pointpillars/CMakeLists.txt b/src/vai_library/pointpillars/CMakeLists.txt
+index bdccdb059..1f9c9f032 100644
+--- a/src/vai_library/pointpillars/CMakeLists.txt
++++ b/src/vai_library/pointpillars/CMakeLists.txt
+@@ -62,7 +62,7 @@ vai_add_library(
+        src/postprocess/anchor.cpp
+        src/postprocess/pointpillars_post.cpp
+        src/postprocess/parse_display_result.cpp
+-  PUBLIC_REQUIRE ${PROJECT_NAME}::dpu_task Eigen3::Eigen)
++  PUBLIC_REQUIRE ${PROJECT_NAME}::dpu_task Eigen3::Eigen absl::log_internal_message)
+ 
+ target_include_directories(${COMPONENT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+ target_include_directories(${COMPONENT_NAME} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+diff --git a/src/vai_library/xmodel_image/CMakeLists.txt b/src/vai_library/xmodel_image/CMakeLists.txt
+index f14608bd4..6c226ce93 100644
+--- a/src/vai_library/xmodel_image/CMakeLists.txt
++++ b/src/vai_library/xmodel_image/CMakeLists.txt
+@@ -66,7 +66,7 @@ vai_add_sample(
+   pthread)
+ 
+ vai_add_sample(test_jpeg_xmodel_image SRCS samples/test_jpeg_xmodel_image.cpp
+-               REQUIRE glog::glog ${OpenCV_LIBS})
++               REQUIRE glog::glog ${OpenCV_LIBS} absl::log_internal_message absl::status)
+ 
+ vai_add_test(test_postprocessor REQUIRE ${PROJECT_NAME}::xmodel_jit
+              ${PROJECT_NAME}::runner_helper vart::runner-assistant glog::glog)
+diff --git a/src/vai_library/xmodel_image/samples/test_jpeg_xmodel_image.cpp b/src/vai_library/xmodel_image/samples/test_jpeg_xmodel_image.cpp
+index 268b4a50b..91604a340 100644
+--- a/src/vai_library/xmodel_image/samples/test_jpeg_xmodel_image.cpp
++++ b/src/vai_library/xmodel_image/samples/test_jpeg_xmodel_image.cpp
+@@ -35,7 +35,7 @@ static inline void Convert_Pb2Json(const google::protobuf::Message& message,
+   std::string jsonStr;
+   google::protobuf::util::JsonOptions options;
+ 
+-  google::protobuf::util::MessageToJsonString(message, &jsonStr, options);
++  ABSL_CHECK_OK(google::protobuf::util::MessageToJsonString(message, &jsonStr, options));
+ 
+   if(g_json_file.empty()) {
+     std::cout << jsonStr << std::endl;
+diff --git a/src/vai_library/xmodel_jit/CMakeLists.txt b/src/vai_library/xmodel_jit/CMakeLists.txt
+index e736618a5..1592c23a5 100644
+--- a/src/vai_library/xmodel_jit/CMakeLists.txt
++++ b/src/vai_library/xmodel_jit/CMakeLists.txt
+@@ -23,7 +23,7 @@ if(BUILD_PYTHON)
+     PRIVATE_REQUIRE ${COMPONENT_NAME} extra_ops xir::xir)
+ 
+   set_target_properties(xmodel_jit_python PROPERTIES INCLUDE_DIRECTORIES
+-    "${VAI_PYTHON_INCLUDE_DIRS};${PYTHON_INCLUDE_DIRS}")
++    "${VAI_PYTHON_INCLUDE_DIRS};${PYTHON_INCLUDE_DIRS};${PYBIND11_PATH}")
+   target_link_libraries(
+     xmodel_jit_python
+     PRIVATE
+diff --git a/src/vai_library/xnnpp/CMakeLists.txt b/src/vai_library/xnnpp/CMakeLists.txt
+index 386408ebd..c0055acfe 100644
+--- a/src/vai_library/xnnpp/CMakeLists.txt
++++ b/src/vai_library/xnnpp/CMakeLists.txt
+@@ -249,7 +249,8 @@ vai_add_library(
+   ${PROJECT_NAME}::math
+   ${PROJECT_NAME}::model_config
+   glog::glog
+-  ${OpenCV_LIBS})
++  ${OpenCV_LIBS}
++  absl::log_internal_message)
+ 
+ target_include_directories(
+   ${COMPONENT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+diff --git a/src/vai_library/xnnpp/src/tfssd/tfssd_post.cpp b/src/vai_library/xnnpp/src/tfssd/tfssd_post.cpp
+index 5f747850d..e38b48495 100644
+--- a/src/vai_library/xnnpp/src/tfssd/tfssd_post.cpp
++++ b/src/vai_library/xnnpp/src/tfssd/tfssd_post.cpp
+@@ -224,17 +224,19 @@ TFSSDPost::TFSSDPost(
+      LOG(FATAL) << "parse error for tensorflow offical config file: " << cfgpath;
+   }
+ 
++/*
+   google::protobuf::LogSilencer* s1 = new google::protobuf::LogSilencer;
+   if (0) {
+     std::cerr << "suppress warning of unused variable " << s1 << std::endl;
+   }
++*/
+ 
+   object_detection::protos::TrainEvalPipelineConfig tfcfg;
+   auto ok = google::protobuf::TextFormat::ParseFromString(text, &tfcfg);
+   if (!ok) {
+     LOG(FATAL) << "parse error for tensorflow offical config file: " << cfgpath;
+   }
+-  delete s1;
++  //delete s1;
+ 
+   num_classes_ = (tfcfg.model().ssd().num_classes() + 1);
+   score_converter_ =
