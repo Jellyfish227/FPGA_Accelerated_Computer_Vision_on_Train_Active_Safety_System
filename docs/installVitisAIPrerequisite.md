@@ -59,25 +59,36 @@ link reference:
 Congratulations! You have successfully configured Docker.
 
 ## Install CUDA Toolkit
-
+skip
 
 ## Install NVIDIA Container Toolkit
 ### link reference:
 https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
 
 ### Steps:
-```bash
-curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
-    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
-```
-```bash
-sudo apt-get update
-```
-```bash
-sudo apt-get install -y nvidia-container-toolkit
-```
+1. Configure the production repository
+    ```bash
+    curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+    && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+        sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+        sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+    ```
+2. Update package list
+    ```bash
+    sudo apt-get update
+    ```
+3. Install NVIDIA Container Toolkit packages
+    ```bash
+    sudo apt-get install -y nvidia-container-toolkit
+    ```
+4. Configure container runtime
+    ```bash
+    sudo nvidia-ctk runtime configure --runtime=docker
+    ```
+5. Restart docker daemon
+    ```bash
+    sudo systemctl restart docker
+    ```
 
 
 ## Install NVIDIA Container Toolkit
