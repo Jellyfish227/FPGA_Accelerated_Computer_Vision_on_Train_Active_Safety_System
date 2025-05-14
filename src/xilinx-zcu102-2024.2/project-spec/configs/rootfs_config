@@ -118,7 +118,7 @@ CONFIG_system-zynqmp=y
 #
 # dnf
 #
-# CONFIG_dnf is not set
+CONFIG_dnf=y
 
 #
 # e2fsprogs 
@@ -2112,7 +2112,7 @@ CONFIG_libdfx=y
 #
 # opencl-clhpp
 #
-# CONFIG_opencl-clhpp-dev is not set
+CONFIG_opencl-clhpp-dev=y
 
 #
 # opencl-headers
@@ -3536,7 +3536,7 @@ CONFIG_dosfstools=y
 #
 # resize-part
 #
-# CONFIG_resize-part is not set
+CONFIG_resize-part=y
 # CONFIG_resize-part-dbg is not set
 # CONFIG_resize-part-dev is not set
 
@@ -3989,19 +3989,32 @@ CONFIG_u-boot-tools=y
 # CONFIG_imagefeature-ssh-server-dropbear is not set
 CONFIG_imagefeature-ssh-server-openssh=y
 CONFIG_imagefeature-hwcodecs=y
-# CONFIG_imagefeature-package-management is not set
-# CONFIG_imagefeature-debug-tweaks is not set
-# CONFIG_imagefeature-empty-root-password is not set
-# CONFIG_imagefeature-serial-autologin-root is not set
+CONFIG_imagefeature-package-management=y
+CONFIG_package-feed-uris=""
+CONFIG_package-feed-archs=""
+CONFIG_imagefeature-debug-tweaks=y
+CONFIG_imagefeature-empty-root-password=y
+CONFIG_imagefeature-serial-autologin-root=y
 CONFIG_Init-manager-systemd=y
 # CONFIG_Init-manager-sysvinit is not set
 
 #
 # user packages 
 #
+CONFIG_cmake=y
 # CONFIG_gpio-demo is not set
-CONFIG_packagegroup-vitisai=y
+CONFIG_opencl-headers-dev=y
+# CONFIG_packagegroup-petalinux-gstreamer is not set
+# CONFIG_packagegroup-petalinux-matchbox is not set
+# CONFIG_packagegroup-petalinux-opencv is not set
+# CONFIG_packagegroup-petalinux-opencv-dev is not set
+# CONFIG_packagegroup-petalinux-self-hosted is not set
+# CONFIG_packagegroup-petalinux-v4lutils is not set
+# CONFIG_packagegroup-petalinux-x11 is not set
 # CONFIG_peekpoke is not set
+CONFIG_vitis-ai-library=y
+# CONFIG_vitis-ai-library-dbg is not set
+CONFIG_vitis-ai-library-dev=y
 
 #
 # PetaLinux RootFS Settings

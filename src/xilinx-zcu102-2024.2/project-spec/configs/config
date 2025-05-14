@@ -157,7 +157,9 @@ CONFIG_SUBSYSTEM_DEVICETREE_COMPILER_FLAGS="-@"
 #
 # FPGA Manager
 #
-# CONFIG_SUBSYSTEM_FPGA_MANAGER is not set
+CONFIG_SUBSYSTEM_FPGA_MANAGER=y
+CONFIG_SUBSYSTEM_PL_DT_OVERLAY_FULL=y
+# CONFIG_SUBSYSTEM_PL_DT_OVERLAY_DFX is not set
 
 #
 # Trusted Firmware ARM (TF-A) Configuration
@@ -285,19 +287,14 @@ CONFIG_YOCTO_PARALLEL_MAKE=""
 #
 # Add pre-mirror url 
 #
-CONFIG_PRE_MIRROR_URL="https://petalinux.xilinx.com/sswreleases/rel-v${PETALINUX_VER}/downloads"
+CONFIG_PRE_MIRROR_URL="file:///tools/Xilinx/PetaLinux/2024.2/library/downloads"
 
 #
 # Local sstate feeds settings
 #
-CONFIG_YOCTO_LOCAL_SSTATE_FEEDS_URL=""
-CONFIG_YOCTO_NETWORK_SSTATE_FEEDS=y
-
-#
-# Network sstate feeds URL
-#
-CONFIG_YOCTO_NETWORK_SSTATE_FEEDS_URL="https://petalinux.xilinx.com/sswreleases/rel-v${PETALINUX_VER}/aarch64/sstate-cache"
-# CONFIG_YOCTO_BB_NO_NETWORK is not set
+CONFIG_YOCTO_LOCAL_SSTATE_FEEDS_URL="/tools/Xilinx/PetaLinux/2024.2/library/aarch64"
+# CONFIG_YOCTO_NETWORK_SSTATE_FEEDS is not set
+CONFIG_YOCTO_BB_NO_NETWORK=y
 # CONFIG_YOCTO_BUILDTOOLS_EXTENDED is not set
 
 #

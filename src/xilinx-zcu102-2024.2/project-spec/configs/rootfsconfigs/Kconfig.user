@@ -1,0 +1,74 @@
+menu "user packages " 
+config cmake  
+	 bool "cmake"
+	 help
+	
+config dnf  
+	 bool "dnf"
+	 help
+	
+config gpio-demo  
+	 bool "gpio-demo"
+	 help
+	
+config nfs-utils  
+	 bool "nfs-utils"
+	 help
+	
+config opencl-clhpp-dev  
+	 bool "opencl-clhpp-dev"
+	 help
+	
+config opencl-headers-dev  
+	 bool "opencl-headers-dev"
+	 help
+	
+config packagegroup-petalinux-gstreamer  
+	 bool "packagegroup-petalinux-gstreamer"
+	 help
+	
+config packagegroup-petalinux-matchbox  
+	 bool "packagegroup-petalinux-matchbox"
+	 help
+	
+config packagegroup-petalinux-opencv  
+	 bool "packagegroup-petalinux-opencv"
+	 help
+	
+config packagegroup-petalinux-opencv-dev  
+	 bool "packagegroup-petalinux-opencv-dev"
+	 help
+	
+config packagegroup-petalinux-self-hosted  
+	 bool "packagegroup-petalinux-self-hosted"
+	 help
+	
+config packagegroup-petalinux-v4lutils  
+	 bool "packagegroup-petalinux-v4lutils"
+	 help
+	
+config packagegroup-petalinux-x11  
+	 bool "packagegroup-petalinux-x11"
+	 help
+	
+config peekpoke  
+	 bool "peekpoke"
+	 help
+	
+config resize-part  
+	 bool "resize-part"
+	 help
+	
+config vitis-ai-library  
+	 bool "vitis-ai-library"
+	 help
+	
+config vitis-ai-library-dbg  
+	 bool "vitis-ai-library-dbg"
+	 help
+	
+config vitis-ai-library-dev  
+	 bool "vitis-ai-library-dev"
+	 help
+	
+endmenu
