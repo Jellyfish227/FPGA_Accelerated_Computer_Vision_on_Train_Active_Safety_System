@@ -179,7 +179,7 @@
                 "vlnv": "xilinx.com:ip:clk_wiz:6.0",
                 "ip_revision": "15",
                 "xci_name": "top_dpu_clk_wiz_0",
-                "xci_path": "ip/top_dpu_clk_wiz_0/top_dpu_clk_wiz_0.xci",
+                "xci_path": "ip/top_dpu_clk_wiz_0_1/top_dpu_clk_wiz_0.xci",
                 "inst_hier_path": "hier_dpu/hier_dpu_clk/dpu_clk_wiz",
                 "parameters": {
                   "CLKOUT1_DRIVES": {
@@ -254,14 +254,14 @@
                 "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
                 "ip_revision": "16",
                 "xci_name": "top_rst_gen_clk_0",
-                "xci_path": "ip/top_rst_gen_clk_0/top_rst_gen_clk_0.xci",
+                "xci_path": "ip/top_rst_gen_clk_0_1/top_rst_gen_clk_0.xci",
                 "inst_hier_path": "hier_dpu/hier_dpu_clk/rst_gen_clk"
               },
               "rst_gen_clk_dsp": {
                 "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
                 "ip_revision": "16",
                 "xci_name": "top_rst_gen_clk_dsp_0",
-                "xci_path": "ip/top_rst_gen_clk_dsp_0/top_rst_gen_clk_dsp_0.xci",
+                "xci_path": "ip/top_rst_gen_clk_dsp_0_1/top_rst_gen_clk_dsp_0.xci",
                 "inst_hier_path": "hier_dpu/hier_dpu_clk/rst_gen_clk_dsp"
               }
             },
@@ -469,7 +469,7 @@
             "components": {
               "dpu_intc_M_AXI_LPD": {
                 "vlnv": "xilinx.com:ip:axi_interconnect:2.1",
-                "xci_path": "ip/top_dpu_intc_M_AXI_LPD_0/top_dpu_intc_M_AXI_LPD_0.xci",
+                "xci_path": "ip/top_dpu_intc_M_AXI_LPD_0_1/top_dpu_intc_M_AXI_LPD_0.xci",
                 "inst_hier_path": "hier_dpu/hier_dpu_ghp/dpu_intc_M_AXI_LPD",
                 "xci_name": "top_dpu_intc_M_AXI_LPD_0",
                 "parameters": {
@@ -586,7 +586,7 @@
                     "vlnv": "xilinx.com:ip:axi_crossbar:2.1",
                     "ip_revision": "34",
                     "xci_name": "top_dpu_intc_M_AXI_LPD_imp_xbar_0",
-                    "xci_path": "ip/top_dpu_intc_M_AXI_LPD_imp_xbar_0/top_dpu_intc_M_AXI_LPD_imp_xbar_0.xci",
+                    "xci_path": "ip/top_dpu_intc_M_AXI_LPD_imp_xbar_0_1/top_dpu_intc_M_AXI_LPD_imp_xbar_0.xci",
                     "inst_hier_path": "hier_dpu/hier_dpu_ghp/dpu_intc_M_AXI_LPD/xbar",
                     "parameters": {
                       "NUM_MI": {
@@ -971,7 +971,7 @@
               },
               "dpu_intc_M_AXI_HPC1_FPD": {
                 "vlnv": "xilinx.com:ip:axi_interconnect:2.1",
-                "xci_path": "ip/top_dpu_intc_M_AXI_HPC1_FPD_0/top_dpu_intc_M_AXI_HPC1_FPD_0.xci",
+                "xci_path": "ip/top_dpu_intc_M_AXI_HPC1_FPD_0_1/top_dpu_intc_M_AXI_HPC1_FPD_0.xci",
                 "inst_hier_path": "hier_dpu/hier_dpu_ghp/dpu_intc_M_AXI_HPC1_FPD",
                 "xci_name": "top_dpu_intc_M_AXI_HPC1_FPD_0",
                 "parameters": {
@@ -1067,7 +1067,7 @@
                     "vlnv": "xilinx.com:ip:axi_crossbar:2.1",
                     "ip_revision": "34",
                     "xci_name": "top_dpu_intc_M_AXI_HPC1_FPD_imp_xbar_0",
-                    "xci_path": "ip/top_dpu_intc_M_AXI_HPC1_FPD_imp_xbar_0/top_dpu_intc_M_AXI_HPC1_FPD_imp_xbar_0.xci",
+                    "xci_path": "ip/top_dpu_intc_M_AXI_HPC1_FPD_imp_xbar_0_1/top_dpu_intc_M_AXI_HPC1_FPD_imp_xbar_0.xci",
                     "inst_hier_path": "hier_dpu/hier_dpu_ghp/dpu_intc_M_AXI_HPC1_FPD/xbar",
                     "parameters": {
                       "NUM_MI": {
@@ -1517,7 +1517,7 @@
                 "vlnv": "xilinx.com:ip:xlconcat:2.1",
                 "ip_revision": "6",
                 "xci_name": "top_dpu_concat_irq_inner_0",
-                "xci_path": "ip/top_dpu_concat_irq_inner_0/top_dpu_concat_irq_inner_0.xci",
+                "xci_path": "ip/top_dpu_concat_irq_inner_0_1/top_dpu_concat_irq_inner_0.xci",
                 "inst_hier_path": "hier_dpu/hier_dpu_irq/dpu_concat_irq_inner",
                 "parameters": {
                   "NUM_PORTS": {
@@ -1563,7 +1563,7 @@
             "vlnv": "xilinx.com:ip:dpuczdx8g:4.1",
             "ip_revision": "0",
             "xci_name": "top_DPUCZDX8G_0",
-            "xci_path": "ip/top_DPUCZDX8G_0/top_DPUCZDX8G_0.xci",
+            "xci_path": "ip/top_DPUCZDX8G_0_1/top_DPUCZDX8G_0.xci",
             "inst_hier_path": "hier_dpu/DPUCZDX8G",
             "parameters": {
               "ALU_LEAKYRELU": {
@@ -1612,13 +1612,13 @@
                 "value": "14"
               },
               "TIME_HOUR": {
-                "value": "22"
+                "value": "23"
               },
               "TIME_MONTH": {
                 "value": "5"
               },
               "TIME_QUARTER": {
-                "value": "2"
+                "value": "1"
               },
               "TIME_YEAR": {
                 "value": "25"
@@ -2024,7 +2024,7 @@
         "vlnv": "xilinx.com:ip:zynq_ultra_ps_e:3.5",
         "ip_revision": "5",
         "xci_name": "top_zynq_ultra_ps_e_0",
-        "xci_path": "ip/top_zynq_ultra_ps_e_0/top_zynq_ultra_ps_e_0.xci",
+        "xci_path": "ip/top_zynq_ultra_ps_e_0_1/top_zynq_ultra_ps_e_0.xci",
         "inst_hier_path": "zynq_ultra_ps_e",
         "parameters": {
           "PSU_BANK_0_IO_STANDARD": {
@@ -2062,9 +2062,6 @@
           },
           "PSU_MIO_26_POLARITY": {
             "value": "Default"
-          },
-          "PSU_MIO_31_INPUT_TYPE": {
-            "value": "cmos"
           },
           "PSU_MIO_31_POLARITY": {
             "value": "Default"
@@ -2584,12 +2581,6 @@
           "PSU__PCIE__DEVICE_ID": {
             "value": "0xD021"
           },
-          "PSU__PCIE__MSIX_CAPABILITY": {
-            "value": "0"
-          },
-          "PSU__PCIE__MSI_CAPABILITY": {
-            "value": "0"
-          },
           "PSU__PCIE__PERIPHERAL__ENABLE": {
             "value": "0"
           },
@@ -3082,7 +3073,7 @@
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "6",
         "xci_name": "top_dpu_concat_irq_0",
-        "xci_path": "ip/top_dpu_concat_irq_0/top_dpu_concat_irq_0.xci",
+        "xci_path": "ip/top_dpu_concat_irq_0_1/top_dpu_concat_irq_0.xci",
         "inst_hier_path": "dpu_concat_irq",
         "parameters": {
           "NUM_PORTS": {
@@ -3094,7 +3085,7 @@
         "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
         "ip_revision": "16",
         "xci_name": "top_rst_gen_reg_0",
-        "xci_path": "ip/top_rst_gen_reg_0/top_rst_gen_reg_0.xci",
+        "xci_path": "ip/top_rst_gen_reg_0_1/top_rst_gen_reg_0.xci",
         "inst_hier_path": "rst_gen_reg"
       }
     },
