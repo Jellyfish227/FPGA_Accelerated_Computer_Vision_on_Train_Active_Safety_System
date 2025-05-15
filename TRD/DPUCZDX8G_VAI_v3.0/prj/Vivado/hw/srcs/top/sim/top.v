@@ -2,7 +2,7 @@
 //Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-//Date        : Wed May 14 23:19:39 2025
+//Date        : Wed May 14 23:41:35 2025
 //Host        : jellyfish-System-Product-Name running 64-bit Ubuntu 24.04.2 LTS
 //Command     : generate_target top.bd
 //Design      : top
@@ -2386,8 +2386,7 @@ module hier_dpu_ghp_imp_1DUMQPD
 endmodule
 
 module hier_dpu_imp_CAA3KC
-   (CLK,
-    GHP_CLK_O,
+   (GHP_CLK_O,
     INTR,
     M_AXI_HP0_FPD_araddr,
     M_AXI_HP0_FPD_arburst,
@@ -2662,7 +2661,6 @@ module hier_dpu_imp_CAA3KC
     M_AXI_LPD_wready,
     M_AXI_LPD_wstrb,
     M_AXI_LPD_wvalid,
-    RSTn,
     S_AXI_CLK,
     S_AXI_RSTn,
     S_AXI_araddr,
@@ -2704,7 +2702,6 @@ module hier_dpu_imp_CAA3KC
     S_AXI_wready,
     S_AXI_wstrb,
     S_AXI_wvalid);
-  input CLK;
   output GHP_CLK_O;
   output [3:0]INTR;
   output [39:0]M_AXI_HP0_FPD_araddr;
@@ -2980,7 +2977,6 @@ module hier_dpu_imp_CAA3KC
   input M_AXI_LPD_wready;
   output [3:0]M_AXI_LPD_wstrb;
   output M_AXI_LPD_wvalid;
-  input RSTn;
   input S_AXI_CLK;
   input S_AXI_RSTn;
   input [39:0]S_AXI_araddr;
@@ -3023,7 +3019,6 @@ module hier_dpu_imp_CAA3KC
   input [3:0]S_AXI_wstrb;
   input S_AXI_wvalid;
 
-  wire CLK;
   wire [39:0]DPUCZDX8G_DPU0_M_AXI_DATA0_ARADDR;
   wire [1:0]DPUCZDX8G_DPU0_M_AXI_DATA0_ARBURST;
   wire [3:0]DPUCZDX8G_DPU0_M_AXI_DATA0_ARCACHE;
@@ -3696,7 +3691,7 @@ module hier_dpu_imp_CAA3KC
   wire M_AXI_LPD_wready;
   wire [3:0]M_AXI_LPD_wstrb;
   wire M_AXI_LPD_wvalid;
-  wire RSTn;
+  wire [0:0]RSTn_INTC_1;
   wire S_AXI_CLK;
   wire S_AXI_RSTn;
   wire [39:0]S_AXI_araddr;
@@ -3743,7 +3738,6 @@ module hier_dpu_imp_CAA3KC
   wire hier_dpu_clk_DSP_CLK1;
   wire hier_dpu_clk_DSP_CLK2;
   wire [0:0]hier_dpu_clk_RSTn_DSP;
-  wire [0:0]hier_dpu_clk_RSTn_INTC;
   wire [0:0]hier_dpu_clk_RSTn_PERI;
 
   top_DPUCZDX8G_0 DPUCZDX8G
@@ -4195,14 +4189,14 @@ module hier_dpu_imp_CAA3KC
         .sfm_m_axi_wstrb(DPUCZDX8G_SFM_M_AXI_WSTRB),
         .sfm_m_axi_wvalid(DPUCZDX8G_SFM_M_AXI_WVALID));
   hier_dpu_clk_imp_P5CT15 hier_dpu_clk
-       (.CLK(CLK),
+       (.CLK(S_AXI_CLK),
         .DPU_CLK(hier_dpu_clk_DPU_CLK),
         .DSP_CLK(hier_dpu_clk_DSP_CLK),
         .DSP_CLK1(hier_dpu_clk_DSP_CLK1),
         .DSP_CLK2(hier_dpu_clk_DSP_CLK2),
-        .RSTn(RSTn),
+        .RSTn(S_AXI_RSTn),
         .RSTn_DSP(hier_dpu_clk_RSTn_DSP),
-        .RSTn_INTC(hier_dpu_clk_RSTn_INTC),
+        .RSTn_INTC(RSTn_INTC_1),
         .RSTn_PERI(hier_dpu_clk_RSTn_PERI),
         .clk_dsp1_ce(DPUCZDX8G_dpu1_2x_clk_ce),
         .clk_dsp2_ce(DPUCZDX8G_dpu2_2x_clk_ce),
@@ -4836,7 +4830,7 @@ module hier_dpu_imp_CAA3KC
         .M_AXI_LPD_wready(M_AXI_LPD_wready),
         .M_AXI_LPD_wstrb(M_AXI_LPD_wstrb),
         .M_AXI_LPD_wvalid(M_AXI_LPD_wvalid),
-        .RSTn_INTC(hier_dpu_clk_RSTn_INTC),
+        .RSTn_INTC(RSTn_INTC_1),
         .RSTn_PERI(hier_dpu_clk_RSTn_PERI),
         .SFM_M_AXI_araddr(DPUCZDX8G_SFM_M_AXI_ARADDR),
         .SFM_M_AXI_arburst(DPUCZDX8G_SFM_M_AXI_ARBURST),
@@ -6967,8 +6961,7 @@ module top
        (.In0(hier_dpu_INTR),
         .dout(dpu_concat_irq_dout));
   hier_dpu_imp_CAA3KC hier_dpu
-       (.CLK(zynq_ultra_ps_e_pl_clk0),
-        .GHP_CLK_O(hier_dpu_GHP_CLK_O),
+       (.GHP_CLK_O(hier_dpu_GHP_CLK_O),
         .INTR(hier_dpu_INTR),
         .M_AXI_HP0_FPD_araddr(hier_dpu_M_AXI_HP0_FPD_ARADDR),
         .M_AXI_HP0_FPD_arburst(hier_dpu_M_AXI_HP0_FPD_ARBURST),
@@ -7243,7 +7236,6 @@ module top
         .M_AXI_LPD_wready(hier_dpu_M_AXI_LPD_WREADY),
         .M_AXI_LPD_wstrb(hier_dpu_M_AXI_LPD_WSTRB),
         .M_AXI_LPD_wvalid(hier_dpu_M_AXI_LPD_WVALID),
-        .RSTn(rst_gen_reg_peripheral_aresetn),
         .S_AXI_CLK(zynq_ultra_ps_e_pl_clk0),
         .S_AXI_RSTn(rst_gen_reg_peripheral_aresetn),
         .S_AXI_araddr(zynq_ultra_ps_e_M_AXI_HPM0_LPD_ARADDR),

@@ -5,7 +5,7 @@ workdir=$(readlink -f $(dirname $0))
 xsadir=${workdir}/../hw/pre-built
 recipesdir=${workdir}/meta-vitis/
 plnxdir=${workdir}/xilinx-zcu102-trd
-zcu102_bsp=${workdir}/xilinx-zcu102-v2022.2-10141622.bsp
+zcu102_bsp=~/Downloads/xilinx-zcu102-v2024.2-11110212.bsp
 
 PKG_OPTIONAL=( \
 	resize-part \

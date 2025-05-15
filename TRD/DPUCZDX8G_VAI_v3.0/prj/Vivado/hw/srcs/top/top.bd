@@ -6,16 +6,10 @@
       "name": "top",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "None",
-      "tool_version": "2024.2",
-      "validated": "true"
+      "tool_version": "2024.2"
     },
     "design_tree": {
       "hier_dpu": {
-        "hier_dpu_clk": {
-          "dpu_clk_wiz": "",
-          "rst_gen_clk": "",
-          "rst_gen_clk_dsp": ""
-        },
         "hier_dpu_ghp": {
           "dpu_intc_M_AXI_LPD": {
             "xbar": "",
@@ -34,7 +28,12 @@
         "hier_dpu_irq": {
           "dpu_concat_irq_inner": ""
         },
-        "DPUCZDX8G": ""
+        "DPUCZDX8G": "",
+        "hier_dpu_clk": {
+          "dpu_clk_wiz": "",
+          "rst_gen_clk": "",
+          "rst_gen_clk_dsp": ""
+        }
       },
       "zynq_ultra_ps_e": "",
       "dpu_concat_irq": "",
@@ -102,256 +101,9 @@
             "direction": "O",
             "left": "3",
             "right": "0"
-          },
-          "CLK": {
-            "type": "clk",
-            "direction": "I"
-          },
-          "RSTn": {
-            "type": "rst",
-            "direction": "I"
           }
         },
         "components": {
-          "hier_dpu_clk": {
-            "ports": {
-              "CLK": {
-                "type": "clk",
-                "direction": "I"
-              },
-              "RSTn": {
-                "type": "rst",
-                "direction": "I"
-              },
-              "DSP_CLK": {
-                "type": "clk",
-                "direction": "O"
-              },
-              "DSP_CLK1": {
-                "type": "clk",
-                "direction": "O"
-              },
-              "DSP_CLK2": {
-                "type": "clk",
-                "direction": "O"
-              },
-              "RSTn_DSP": {
-                "type": "rst",
-                "direction": "O",
-                "left": "0",
-                "right": "0"
-              },
-              "DPU_CLK": {
-                "type": "clk",
-                "direction": "O"
-              },
-              "LOCKED": {
-                "type": "data",
-                "direction": "O"
-              },
-              "RSTn_INTC": {
-                "type": "rst",
-                "direction": "O",
-                "left": "0",
-                "right": "0"
-              },
-              "RSTn_PERI": {
-                "type": "rst",
-                "direction": "O",
-                "left": "0",
-                "right": "0"
-              },
-              "clk_dsp_ce": {
-                "type": "ce",
-                "direction": "I"
-              },
-              "clk_dsp1_ce": {
-                "type": "ce",
-                "direction": "I"
-              },
-              "clk_dsp2_ce": {
-                "type": "ce",
-                "direction": "I"
-              }
-            },
-            "components": {
-              "dpu_clk_wiz": {
-                "vlnv": "xilinx.com:ip:clk_wiz:6.0",
-                "ip_revision": "15",
-                "xci_name": "top_dpu_clk_wiz_0",
-                "xci_path": "ip/top_dpu_clk_wiz_0_1/top_dpu_clk_wiz_0.xci",
-                "inst_hier_path": "hier_dpu/hier_dpu_clk/dpu_clk_wiz",
-                "parameters": {
-                  "CLKOUT1_DRIVES": {
-                    "value": "Buffer_with_CE"
-                  },
-                  "CLKOUT1_MATCHED_ROUTING": {
-                    "value": "true"
-                  },
-                  "CLKOUT1_REQUESTED_OUT_FREQ": {
-                    "value": "650"
-                  },
-                  "CLKOUT2_DRIVES": {
-                    "value": "Buffer_with_CE"
-                  },
-                  "CLKOUT2_MATCHED_ROUTING": {
-                    "value": "true"
-                  },
-                  "CLKOUT2_REQUESTED_OUT_FREQ": {
-                    "value": "650"
-                  },
-                  "CLKOUT2_USED": {
-                    "value": "true"
-                  },
-                  "CLKOUT3_DRIVES": {
-                    "value": "Buffer_with_CE"
-                  },
-                  "CLKOUT3_MATCHED_ROUTING": {
-                    "value": "true"
-                  },
-                  "CLKOUT3_REQUESTED_OUT_FREQ": {
-                    "value": "650"
-                  },
-                  "CLKOUT3_USED": {
-                    "value": "true"
-                  },
-                  "CLKOUT4_MATCHED_ROUTING": {
-                    "value": "true"
-                  },
-                  "CLKOUT4_REQUESTED_OUT_FREQ": {
-                    "value": "325"
-                  },
-                  "CLKOUT4_USED": {
-                    "value": "true"
-                  },
-                  "CLK_OUT1_PORT": {
-                    "value": "clk_dsp"
-                  },
-                  "CLK_OUT2_PORT": {
-                    "value": "clk_dsp1"
-                  },
-                  "CLK_OUT3_PORT": {
-                    "value": "clk_dsp2"
-                  },
-                  "CLK_OUT4_PORT": {
-                    "value": "clk_dpu"
-                  },
-                  "PRIMITIVE": {
-                    "value": "Auto"
-                  },
-                  "RESET_TYPE": {
-                    "value": "ACTIVE_LOW"
-                  },
-                  "USE_LOCKED": {
-                    "value": "true"
-                  },
-                  "USE_RESET": {
-                    "value": "true"
-                  }
-                }
-              },
-              "rst_gen_clk": {
-                "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
-                "ip_revision": "16",
-                "xci_name": "top_rst_gen_clk_0",
-                "xci_path": "ip/top_rst_gen_clk_0_1/top_rst_gen_clk_0.xci",
-                "inst_hier_path": "hier_dpu/hier_dpu_clk/rst_gen_clk"
-              },
-              "rst_gen_clk_dsp": {
-                "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
-                "ip_revision": "16",
-                "xci_name": "top_rst_gen_clk_dsp_0",
-                "xci_path": "ip/top_rst_gen_clk_dsp_0_1/top_rst_gen_clk_dsp_0.xci",
-                "inst_hier_path": "hier_dpu/hier_dpu_clk/rst_gen_clk_dsp"
-              }
-            },
-            "nets": {
-              "CLK_1": {
-                "ports": [
-                  "CLK",
-                  "dpu_clk_wiz/clk_in1"
-                ]
-              },
-              "RSTn_1": {
-                "ports": [
-                  "RSTn",
-                  "dpu_clk_wiz/resetn",
-                  "rst_gen_clk/ext_reset_in",
-                  "rst_gen_clk_dsp/ext_reset_in"
-                ]
-              },
-              "clk_dsp1_ce_1": {
-                "ports": [
-                  "clk_dsp1_ce",
-                  "dpu_clk_wiz/clk_dsp1_ce"
-                ]
-              },
-              "clk_dsp2_ce_1": {
-                "ports": [
-                  "clk_dsp2_ce",
-                  "dpu_clk_wiz/clk_dsp2_ce"
-                ]
-              },
-              "clk_dsp_ce_1": {
-                "ports": [
-                  "clk_dsp_ce",
-                  "dpu_clk_wiz/clk_dsp_ce"
-                ]
-              },
-              "dpu_clk_wiz_clk_dpu": {
-                "ports": [
-                  "dpu_clk_wiz/clk_dpu",
-                  "DPU_CLK",
-                  "rst_gen_clk/slowest_sync_clk"
-                ]
-              },
-              "dpu_clk_wiz_clk_dsp": {
-                "ports": [
-                  "dpu_clk_wiz/clk_dsp",
-                  "DSP_CLK",
-                  "rst_gen_clk_dsp/slowest_sync_clk"
-                ]
-              },
-              "dpu_clk_wiz_clk_dsp1": {
-                "ports": [
-                  "dpu_clk_wiz/clk_dsp1",
-                  "DSP_CLK1"
-                ]
-              },
-              "dpu_clk_wiz_clk_dsp2": {
-                "ports": [
-                  "dpu_clk_wiz/clk_dsp2",
-                  "DSP_CLK2"
-                ]
-              },
-              "dpu_clk_wiz_locked": {
-                "ports": [
-                  "dpu_clk_wiz/locked",
-                  "LOCKED",
-                  "rst_gen_clk/dcm_locked",
-                  "rst_gen_clk_dsp/dcm_locked"
-                ]
-              },
-              "rst_gen_clk_dsp_peripheral_aresetn": {
-                "ports": [
-                  "rst_gen_clk_dsp/peripheral_aresetn",
-                  "RSTn_DSP"
-                ]
-              },
-              "rst_gen_clk_interconnect_aresetn": {
-                "ports": [
-                  "rst_gen_clk/interconnect_aresetn",
-                  "RSTn_INTC"
-                ]
-              },
-              "rst_gen_clk_peripheral_aresetn": {
-                "ports": [
-                  "rst_gen_clk/peripheral_aresetn",
-                  "RSTn_PERI"
-                ]
-              }
-            }
-          },
           "hier_dpu_ghp": {
             "interface_ports": {
               "DPU0_M_AXI_DATA0": {
@@ -1781,6 +1533,245 @@
                 }
               }
             }
+          },
+          "hier_dpu_clk": {
+            "ports": {
+              "CLK": {
+                "type": "clk",
+                "direction": "I"
+              },
+              "RSTn": {
+                "type": "rst",
+                "direction": "I"
+              },
+              "DSP_CLK": {
+                "type": "clk",
+                "direction": "O"
+              },
+              "DSP_CLK1": {
+                "type": "clk",
+                "direction": "O"
+              },
+              "DSP_CLK2": {
+                "type": "clk",
+                "direction": "O"
+              },
+              "RSTn_DSP": {
+                "type": "rst",
+                "direction": "O",
+                "left": "0",
+                "right": "0"
+              },
+              "DPU_CLK": {
+                "type": "clk",
+                "direction": "O"
+              },
+              "LOCKED": {
+                "type": "data",
+                "direction": "O"
+              },
+              "RSTn_INTC": {
+                "type": "rst",
+                "direction": "O",
+                "left": "0",
+                "right": "0"
+              },
+              "RSTn_PERI": {
+                "type": "rst",
+                "direction": "O",
+                "left": "0",
+                "right": "0"
+              },
+              "clk_dsp_ce": {
+                "type": "ce",
+                "direction": "I"
+              },
+              "clk_dsp1_ce": {
+                "type": "ce",
+                "direction": "I"
+              },
+              "clk_dsp2_ce": {
+                "type": "ce",
+                "direction": "I"
+              }
+            },
+            "components": {
+              "dpu_clk_wiz": {
+                "vlnv": "xilinx.com:ip:clk_wiz:6.0",
+                "ip_revision": "15",
+                "xci_name": "top_dpu_clk_wiz_0",
+                "xci_path": "ip/top_dpu_clk_wiz_0_1/top_dpu_clk_wiz_0.xci",
+                "inst_hier_path": "hier_dpu/hier_dpu_clk/dpu_clk_wiz",
+                "parameters": {
+                  "CLKOUT1_DRIVES": {
+                    "value": "Buffer_with_CE"
+                  },
+                  "CLKOUT1_MATCHED_ROUTING": {
+                    "value": "true"
+                  },
+                  "CLKOUT1_REQUESTED_OUT_FREQ": {
+                    "value": "650"
+                  },
+                  "CLKOUT2_DRIVES": {
+                    "value": "Buffer_with_CE"
+                  },
+                  "CLKOUT2_MATCHED_ROUTING": {
+                    "value": "true"
+                  },
+                  "CLKOUT2_REQUESTED_OUT_FREQ": {
+                    "value": "650"
+                  },
+                  "CLKOUT2_USED": {
+                    "value": "true"
+                  },
+                  "CLKOUT3_DRIVES": {
+                    "value": "Buffer_with_CE"
+                  },
+                  "CLKOUT3_MATCHED_ROUTING": {
+                    "value": "true"
+                  },
+                  "CLKOUT3_REQUESTED_OUT_FREQ": {
+                    "value": "650"
+                  },
+                  "CLKOUT3_USED": {
+                    "value": "true"
+                  },
+                  "CLKOUT4_MATCHED_ROUTING": {
+                    "value": "true"
+                  },
+                  "CLKOUT4_REQUESTED_OUT_FREQ": {
+                    "value": "325"
+                  },
+                  "CLKOUT4_USED": {
+                    "value": "true"
+                  },
+                  "CLK_OUT1_PORT": {
+                    "value": "clk_dsp"
+                  },
+                  "CLK_OUT2_PORT": {
+                    "value": "clk_dsp1"
+                  },
+                  "CLK_OUT3_PORT": {
+                    "value": "clk_dsp2"
+                  },
+                  "CLK_OUT4_PORT": {
+                    "value": "clk_dpu"
+                  },
+                  "PRIMITIVE": {
+                    "value": "Auto"
+                  },
+                  "RESET_TYPE": {
+                    "value": "ACTIVE_LOW"
+                  },
+                  "USE_LOCKED": {
+                    "value": "true"
+                  },
+                  "USE_RESET": {
+                    "value": "true"
+                  }
+                }
+              },
+              "rst_gen_clk": {
+                "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
+                "ip_revision": "16",
+                "xci_name": "top_rst_gen_clk_0",
+                "xci_path": "ip/top_rst_gen_clk_0_1/top_rst_gen_clk_0.xci",
+                "inst_hier_path": "hier_dpu/hier_dpu_clk/rst_gen_clk"
+              },
+              "rst_gen_clk_dsp": {
+                "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
+                "ip_revision": "16",
+                "xci_name": "top_rst_gen_clk_dsp_0",
+                "xci_path": "ip/top_rst_gen_clk_dsp_0_1/top_rst_gen_clk_dsp_0.xci",
+                "inst_hier_path": "hier_dpu/hier_dpu_clk/rst_gen_clk_dsp"
+              }
+            },
+            "nets": {
+              "CLK_1": {
+                "ports": [
+                  "CLK",
+                  "dpu_clk_wiz/clk_in1"
+                ]
+              },
+              "RSTn_1": {
+                "ports": [
+                  "RSTn",
+                  "dpu_clk_wiz/resetn",
+                  "rst_gen_clk/ext_reset_in",
+                  "rst_gen_clk_dsp/ext_reset_in"
+                ]
+              },
+              "clk_dsp1_ce_1": {
+                "ports": [
+                  "clk_dsp1_ce",
+                  "dpu_clk_wiz/clk_dsp1_ce"
+                ]
+              },
+              "clk_dsp2_ce_1": {
+                "ports": [
+                  "clk_dsp2_ce",
+                  "dpu_clk_wiz/clk_dsp2_ce"
+                ]
+              },
+              "clk_dsp_ce_1": {
+                "ports": [
+                  "clk_dsp_ce",
+                  "dpu_clk_wiz/clk_dsp_ce"
+                ]
+              },
+              "dpu_clk_wiz_clk_dpu": {
+                "ports": [
+                  "dpu_clk_wiz/clk_dpu",
+                  "DPU_CLK",
+                  "rst_gen_clk/slowest_sync_clk"
+                ]
+              },
+              "dpu_clk_wiz_clk_dsp": {
+                "ports": [
+                  "dpu_clk_wiz/clk_dsp",
+                  "DSP_CLK",
+                  "rst_gen_clk_dsp/slowest_sync_clk"
+                ]
+              },
+              "dpu_clk_wiz_clk_dsp1": {
+                "ports": [
+                  "dpu_clk_wiz/clk_dsp1",
+                  "DSP_CLK1"
+                ]
+              },
+              "dpu_clk_wiz_clk_dsp2": {
+                "ports": [
+                  "dpu_clk_wiz/clk_dsp2",
+                  "DSP_CLK2"
+                ]
+              },
+              "dpu_clk_wiz_locked": {
+                "ports": [
+                  "dpu_clk_wiz/locked",
+                  "LOCKED",
+                  "rst_gen_clk/dcm_locked",
+                  "rst_gen_clk_dsp/dcm_locked"
+                ]
+              },
+              "rst_gen_clk_dsp_peripheral_aresetn": {
+                "ports": [
+                  "rst_gen_clk_dsp/peripheral_aresetn",
+                  "RSTn_DSP"
+                ]
+              },
+              "rst_gen_clk_interconnect_aresetn": {
+                "ports": [
+                  "rst_gen_clk/interconnect_aresetn",
+                  "RSTn_INTC"
+                ]
+              },
+              "rst_gen_clk_peripheral_aresetn": {
+                "ports": [
+                  "rst_gen_clk/peripheral_aresetn",
+                  "RSTn_PERI"
+                ]
+              }
+            }
           }
         },
         "interface_nets": {
@@ -1894,12 +1885,6 @@
           }
         },
         "nets": {
-          "CLK_1": {
-            "ports": [
-              "CLK",
-              "hier_dpu_clk/CLK"
-            ]
-          },
           "DPUCZDX8G_dpu0_interrupt": {
             "ports": [
               "DPUCZDX8G/dpu0_interrupt",
@@ -1942,22 +1927,24 @@
               "hier_dpu_irq/In3"
             ]
           },
-          "RSTn_1": {
+          "RSTn_INTC_1": {
             "ports": [
-              "RSTn",
-              "hier_dpu_clk/RSTn"
+              "hier_dpu_clk/RSTn_INTC",
+              "hier_dpu_ghp/RSTn_INTC"
             ]
           },
           "S_AXI_CLK_1": {
             "ports": [
               "S_AXI_CLK",
-              "DPUCZDX8G/s_axi_aclk"
+              "DPUCZDX8G/s_axi_aclk",
+              "hier_dpu_clk/CLK"
             ]
           },
           "S_AXI_RSTn_1": {
             "ports": [
               "S_AXI_RSTn",
-              "DPUCZDX8G/s_axi_aresetn"
+              "DPUCZDX8G/s_axi_aresetn",
+              "hier_dpu_clk/RSTn"
             ]
           },
           "hier_dpu_clk_DPU_CLK": {
@@ -1990,12 +1977,6 @@
             "ports": [
               "hier_dpu_clk/RSTn_DSP",
               "DPUCZDX8G/dpu_2x_resetn"
-            ]
-          },
-          "hier_dpu_clk_RSTn_INTC": {
-            "ports": [
-              "hier_dpu_clk/RSTn_INTC",
-              "hier_dpu_ghp/RSTn_INTC"
             ]
           },
           "hier_dpu_clk_RSTn_PERI": {
@@ -3167,7 +3148,6 @@
       "rst_gen_reg_peripheral_aresetn": {
         "ports": [
           "rst_gen_reg/peripheral_aresetn",
-          "hier_dpu/RSTn",
           "hier_dpu/S_AXI_RSTn"
         ]
       },
@@ -3176,7 +3156,6 @@
           "zynq_ultra_ps_e/pl_clk0",
           "zynq_ultra_ps_e/maxihpm0_lpd_aclk",
           "rst_gen_reg/slowest_sync_clk",
-          "hier_dpu/CLK",
           "hier_dpu/S_AXI_CLK"
         ]
       },

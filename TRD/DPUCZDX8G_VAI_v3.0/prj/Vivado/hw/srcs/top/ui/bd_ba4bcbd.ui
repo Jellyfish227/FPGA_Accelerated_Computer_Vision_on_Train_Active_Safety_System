@@ -1,0 +1,41 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.0",
+   "Default View_TopLeft":"-374,-165",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:21.0 TLS
+#  -string -flagsOSRD
+preplace port port-id_CLK -pg 1 -lvl 0 -x -20 -y 190 -defaultsOSRD
+preplace port port-id_RSTn -pg 1 -lvl 0 -x -20 -y 140 -defaultsOSRD
+preplace port port-id_DSP_CLK -pg 1 -lvl 3 -x 650 -y 20 -defaultsOSRD
+preplace port port-id_DSP_CLK1 -pg 1 -lvl 3 -x 650 -y 200 -defaultsOSRD
+preplace port port-id_DSP_CLK2 -pg 1 -lvl 3 -x 650 -y 460 -defaultsOSRD
+preplace port port-id_DPU_CLK -pg 1 -lvl 3 -x 650 -y 230 -defaultsOSRD
+preplace port port-id_LOCKED -pg 1 -lvl 3 -x 650 -y 260 -defaultsOSRD
+preplace port port-id_clk_dsp_ce -pg 1 -lvl 0 -x -20 -y 220 -defaultsOSRD
+preplace port port-id_clk_dsp1_ce -pg 1 -lvl 0 -x -20 -y 250 -defaultsOSRD
+preplace port port-id_clk_dsp2_ce -pg 1 -lvl 0 -x -20 -y 280 -defaultsOSRD
+preplace portBus RSTn_DSP -pg 1 -lvl 3 -x 650 -y 160 -defaultsOSRD
+preplace portBus RSTn_INTC -pg 1 -lvl 3 -x 650 -y 370 -defaultsOSRD
+preplace portBus RSTn_PERI -pg 1 -lvl 3 -x 650 -y 400 -defaultsOSRD
+preplace inst dpu_clk_wiz -pg 1 -lvl 1 -x 130 -y 240 -defaultsOSRD
+preplace inst rst_gen_clk -pg 1 -lvl 2 -x 450 -y 360 -defaultsOSRD
+preplace inst rst_gen_clk_dsp -pg 1 -lvl 2 -x 450 -y 120 -defaultsOSRD
+preplace netloc CLK_1 1 0 1 10J 190n
+preplace netloc RSTn_1 1 0 2 20 140 250
+preplace netloc clk_dsp1_ce_1 1 0 1 20J 250n
+preplace netloc clk_dsp2_ce_1 1 0 1 NJ 280
+preplace netloc clk_dsp_ce_1 1 0 1 0J 220n
+preplace netloc dpu_clk_wiz_clk_dpu 1 1 2 260 240 630J
+preplace netloc dpu_clk_wiz_clk_dsp 1 1 2 240 20 NJ
+preplace netloc dpu_clk_wiz_clk_dsp1 1 1 2 NJ 220 630J
+preplace netloc dpu_clk_wiz_clk_dsp2 1 1 2 240J 460 NJ
+preplace netloc dpu_clk_wiz_locked 1 1 2 270 260 NJ
+preplace netloc rst_gen_clk_dsp_peripheral_aresetn 1 2 1 NJ 160
+preplace netloc rst_gen_clk_interconnect_aresetn 1 2 1 630J 370n
+preplace netloc rst_gen_clk_peripheral_aresetn 1 2 1 NJ 400
+levelinfo -pg 1 -20 130 450 650
+pagesize -pg 1 -db -bbox -sgen -150 0 810 480
+"
+}
+

@@ -7,6 +7,7 @@ CONFIG_peekpoke
 CONFIG_vitis-ai-library
 CONFIG_vitis-ai-library-dev
 CONFIG_vitis-ai-library-dbg
+CONFIG_vai-benchmark
 
 CONFIG_dnf
 CONFIG_nfs-utils

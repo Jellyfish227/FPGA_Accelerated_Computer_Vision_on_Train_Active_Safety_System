@@ -1,0 +1,54 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.0",
+   "Default View_TopLeft":"-365,-42",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:21.0 TLS
+#  -string -flagsOSRD
+preplace port DPU0_M_AXI_DATA0 -pg 1 -lvl 0 -x 0 -y 50 -defaultsOSRD
+preplace port DPU0_M_AXI_DATA1 -pg 1 -lvl 0 -x 0 -y 80 -defaultsOSRD
+preplace port DPU0_M_AXI_INSTR -pg 1 -lvl 0 -x 0 -y 190 -defaultsOSRD
+preplace port DPU1_M_AXI_DATA0 -pg 1 -lvl 0 -x 0 -y 110 -defaultsOSRD
+preplace port DPU1_M_AXI_DATA1 -pg 1 -lvl 0 -x 0 -y 140 -defaultsOSRD
+preplace port DPU1_M_AXI_INSTR -pg 1 -lvl 0 -x 0 -y 220 -defaultsOSRD
+preplace port DPU2_M_AXI_DATA0 -pg 1 -lvl 0 -x 0 -y 20 -defaultsOSRD
+preplace port DPU2_M_AXI_DATA1 -pg 1 -lvl 0 -x 0 -y 550 -defaultsOSRD
+preplace port DPU2_M_AXI_INSTR -pg 1 -lvl 0 -x 0 -y 250 -defaultsOSRD
+preplace port SFM_M_AXI -pg 1 -lvl 0 -x 0 -y 580 -defaultsOSRD
+preplace port M_AXI_HPC0_FPD -pg 1 -lvl 2 -x 390 -y 20 -defaultsOSRD
+preplace port M_AXI_HPC1_FPD -pg 1 -lvl 2 -x 390 -y 650 -defaultsOSRD
+preplace port M_AXI_HP0_FPD -pg 1 -lvl 2 -x 390 -y 50 -defaultsOSRD
+preplace port M_AXI_HP1_FPD -pg 1 -lvl 2 -x 390 -y 80 -defaultsOSRD
+preplace port M_AXI_HP2_FPD -pg 1 -lvl 2 -x 390 -y 110 -defaultsOSRD
+preplace port M_AXI_HP3_FPD -pg 1 -lvl 2 -x 390 -y 140 -defaultsOSRD
+preplace port M_AXI_LPD -pg 1 -lvl 2 -x 390 -y 320 -defaultsOSRD
+preplace port port-id_CLK -pg 1 -lvl 0 -x 0 -y 280 -defaultsOSRD
+preplace port port-id_RSTn_INTC -pg 1 -lvl 0 -x 0 -y 310 -defaultsOSRD
+preplace port port-id_RSTn_PERI -pg 1 -lvl 0 -x 0 -y 610 -defaultsOSRD
+preplace port port-id_GHP_CLK_I -pg 1 -lvl 0 -x 0 -y 340 -defaultsOSRD
+preplace port port-id_GHP_RSTn -pg 1 -lvl 0 -x 0 -y 640 -defaultsOSRD
+preplace port port-id_GHP_CLK_O -pg 1 -lvl 2 -x 390 -y 500 -defaultsOSRD
+preplace inst dpu_intc_M_AXI_LPD -pg 1 -lvl 1 -x 220 -y 320 -defaultsOSRD
+preplace inst dpu_intc_M_AXI_HPC1_FPD -pg 1 -lvl 1 -x 220 -y 650 -defaultsOSRD
+preplace netloc CLK_1 1 0 1 50 260n
+preplace netloc GHP_CLK_I_1 1 0 2 40 500 NJ
+preplace netloc GHP_RSTn_1 1 0 1 30 360n
+preplace netloc RSTn_INTC_1 1 0 1 70 280n
+preplace netloc RSTn_PERI_1 1 0 1 60 320n
+preplace netloc DPU0_M_AXI_DATA0_1 1 0 2 NJ 50 NJ
+preplace netloc DPU0_M_AXI_DATA1_1 1 0 2 NJ 80 NJ
+preplace netloc DPU0_M_AXI_INSTR_1 1 0 1 50J 190n
+preplace netloc DPU1_M_AXI_DATA0_1 1 0 2 NJ 110 NJ
+preplace netloc DPU1_M_AXI_DATA1_1 1 0 2 NJ 140 NJ
+preplace netloc DPU1_M_AXI_INSTR_1 1 0 1 NJ 220
+preplace netloc DPU2_M_AXI_DATA0_1 1 0 2 NJ 20 NJ
+preplace netloc DPU2_M_AXI_DATA1_1 1 0 1 20J 550n
+preplace netloc DPU2_M_AXI_INSTR_1 1 0 1 50J 240n
+preplace netloc SFM_M_AXI_1 1 0 1 NJ 580
+preplace netloc dpu_intc_M_AXI_HPC1_FPD_M00_AXI 1 1 1 NJ 650
+preplace netloc dpu_intc_M_AXI_LPD_M00_AXI 1 1 1 NJ 320
+levelinfo -pg 1 0 220 390
+pagesize -pg 1 -db -bbox -sgen -190 0 560 800
+"
+}
+

@@ -4012,6 +4012,7 @@ CONFIG_opencl-headers-dev=y
 # CONFIG_packagegroup-petalinux-v4lutils is not set
 # CONFIG_packagegroup-petalinux-x11 is not set
 # CONFIG_peekpoke is not set
+CONFIG_vai-benchmark=y
 CONFIG_vitis-ai-library=y
 # CONFIG_vitis-ai-library-dbg is not set
 CONFIG_vitis-ai-library-dev=y
