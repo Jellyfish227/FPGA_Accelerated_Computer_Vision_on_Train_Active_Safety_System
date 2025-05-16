@@ -6,6 +6,7 @@
 \usepackage{cancel}					% To use the slash to cancel out stuff in work
 \usepackage{multirow}
 \usepackage{lastpage}
+\usepackage{pdfpages}
 
 \usepackage[
 backend=biber,
@@ -115,26 +116,23 @@ urldate=iso
 \fancyfoot[RO,R]{Page \thepage\ of \pageref{LastPage}}
 
 \section{Introduction}
-What is the system you want to design? Why?
-detailed account of the project objectives
-and achievements (for future reference, evaluation, and even
-reproduction)
+% What is the system you want to design? Why?
+% detailed account of the project objectives
+% and achievements (for future reference, evaluation, and even
+% reproduction)
 
-The CENG3430 final project involved implementing a computer vision system on the Zynq UltraScale+ MPSoC \cite{zynq_ultrascale_swdev}
-that uses the MPU6050 to direct the laser. Our goal was to create a responsive turret for maximizing hits.
+The CENG3430 final project involved implementing a computer vision acceleration platform on the Zynq UltraScale+ MPSoC \cite{zynq_ultrascale_swdev}
+that can be used to implement a train active safety system.
 
 \noindent The workflow consists of two phases:
 \begin{enumerate}
-    \item \textbf{Data Pre-processing:} We collect and process gyro and accelerometer 
-          data from the \\MPU6050, then transmit the calculated angles via UART.
-    \item \textbf{Data AI-Inferencing:} The angles are received and converted into PWM 
-          signals to control the servo motors using Vitis AI \cite{vitis_ai_docs} for efficient inference.
-    \item \textbf{Data Post-processing:} The PWM signals are received and converted into 
-          the corresponding angles to control the servo motors.
+    \item \textbf{Data Pre-processing:} We collect and process the data from the camera from PS USB port, then port the video stream to the PL DPU. 
+    \item \textbf{Data AI-Inferencing:} The DPU contains a set of pre-trained models that will perform lane detection, object detection, depth-of-field estimation and drivable area prediction.
+    \item \textbf{Data Post-processing:} The PS should release PWM signals to control the motors to stop the rotation. But in our actual implementation, we don't really have enough time to implement the remaining actuators. 
 \end{enumerate}
-This report outlines our challenges faced and insights gained during implementation, aiming to deliver a functional motion-controlled laser turret.
+This report outlines our challenges faced and insights gained during implementation, aiming to deliver a fast and efficient computer vision acceleration platform for train active safety system.
 
-\section{Design}
+\section{Design flow}
 Overview: Describe the overall architecture, inputs, and outputs of the
 system.
 You are highly suggested to use flowcharts and block diagrams for
@@ -142,49 +140,30 @@ better presentation.
 Module Descriptions: Discuss each module of the system clearly and
 the interactions among them.
 
-\subsection{Transmission of Data}
-\subsubsection{v1 of data sending formatting(float string)}\text{}
-\begin{code}[language=c]
-/* Commit hash: c6e8ed6, main_mpu.c*/
-void sendData(float yawAngle, float pitchAngle) {
-    char data[22];
-    // format the data as a string
-    sprintf(data, "%.10f,%.10f", yawAngle, pitchAngle);
-    char* chp = data;
-    while (*chp) 
-        UARTCharPut(UART5_BASE, *chp++);
-}
-\end{code}\text{}\\
-In this initial implementation, we formatted the yaw and pitch angles into a string using sprintf. 
-While this allowed us to send the angles with high precision (10 decimal places), 
-the long string to be sent over UART wirelessly increases the risk of data loss. And turns out during the testing, 
-we found that the data received was very unstable, we have presumed that the problem is due to the data being sent is too long, 
-which means there are more characters that can potentially be lost, and just one character lost can cause the whole data to be corrupted.
+\subsection{Choice of board}
+We have decided to use the Zynq UltraScale+ MPSoC ZCU102 and ZCU104 \cite{zynq_ultrascale_swdev} as our development board instead of 
+using the original ZedBoard \cite{zedboard_docs} as the original ZedBoard is not supported by the Vitis AI library.
 
-\subsubsection{v2 of data sending formatting(int string)}\text{}
-\begin{code}[language=c] 
-/* Commit hash: af09000, main_mpu.c */
-void sendData(float yawAngle, float pitchAngle) {
-    char data[7]; 
-    sprintf(data, "%03d%03d\0", (int)yawAngle, (int)pitchAngle);
-    /* same send looping as before*/
-    UARTCharPut(UART5_BASE, '\n'); // '\n' to mark end of transmission
-}
-\end{code}
-\textbf{}\\
-In this update, we have made 2 important changes:
-\begin{enumerate}
-    \item We have changed the data string to be a string of 7 characters, which is a lot shorter than the previous 22 characters.
-    \item We have added a newline character to indicate the end of the transmission, which is a simple way to check the data integrity.
-\end{enumerate}
-We decided to sacrifice the precision of the data to just send the integral part of the angle, 
-in order to reduce the risk of data corruption due to data loss during transmission. 
-And in the previous implementation, we found that we have no way to check the data integrity, 
-so we have to add a newline character to indicate the end of the transmission.
-However, the problem was not fixed, in the slave end, we found that the data received was still very unstable, 
-we noticed that sometimes the data received would swap their positions(i.e. the yaw angle would be the pitch angle and vice versa), 
-or sometimes some digits that should be in the pitch angle would appears in the array of yaw angle characters received.
-Therefore, we started to investigate in the slave end.
+The Zynq UltraScale+ platform provides the following features:
+\begin{itemize}
+    \item More logic resources
+    \item More powerful processing unit, including the Real-Time Processing Unit (RPU)
+    \item More support for AI, including the Vitis AI library
+\end{itemize}
+
+\subsection{Phase 1: Data Pre-processing}
+\includepdf[pages=-]{figs/DPUBlockDesign.pdf}
+In this stage, in order to prototype the input in the most efficient way, we make use of the given USB protocal from the PS side. 
+We have tried to utilize the RPU to do the continues video fetch, but we were not able to find a way to achieve this, so we just use the normal approach that fetch the video fram from the USB port, 
+then pass the frame to the DPU with the AXI HP inteconnect. Which allows bandwidth up to 128bits. 
+
+
+\subsection{Phase 2: Data AI-Inferencing}
+This is the main part of this project. Unfortunatly, due to the time constraint, we were not able to implement a dataflow-based accelerator implementation. 
+Therefore, we decided to leverage the Vitis AI library together with the soft DPU IP to implement the accelerator and deploying the pre-trained models. 
+
+\subsection{Phase 3: Data Post-processing}
+
 
 \section{Implementation}
 Discuss in detail how you implement the system, you can take
