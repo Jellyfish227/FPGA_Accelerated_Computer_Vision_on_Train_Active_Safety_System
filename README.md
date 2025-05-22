@@ -1,7 +1,7 @@
-# CENG3430_Project-FPGA_Accelerated_Computer_Vision_on_Train_Active_Safety_System
+# FPGA_Accelerated_Computer_Vision_on_Train_Active_Safety_System (FATASS)
 
 This is an associated final project for CENG3430 - Rapid Prototyping of Digital Systems @ CUHK CSE.
-
+And this project is still ongoing and under maintenance after the course finished as we are hoping to create a more polished product and make it a reasearch. 
 
 ## Team Members
 
